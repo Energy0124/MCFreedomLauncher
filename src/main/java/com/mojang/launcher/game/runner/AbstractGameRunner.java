@@ -103,12 +103,12 @@ public abstract class AbstractGameRunner
         setStatus(GameInstanceStatus.IDLE);
         return;
       }
-      if (this.version.getMinimumLauncherVersion() > getLauncher().getLauncherFormatVersion())
+      /*if (this.version.getMinimumLauncherVersion() > getLauncher().getLauncherFormatVersion())
       {
         LOGGER.error("An update to your launcher is available and is required to play " + this.version.getId() + ". Please restart your launcher.");
         setStatus(GameInstanceStatus.IDLE);
         return;
-      }
+      }*/
       if (!syncInfo.isUpToDate()) {
         try
         {
