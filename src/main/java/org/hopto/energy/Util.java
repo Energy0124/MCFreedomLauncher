@@ -88,31 +88,34 @@ public class Util {
         System.exit(0);
     }
 
-    public static OS getPlatform() {
-        String osName = System.getProperty("os.name").toLowerCase();
-        if (osName.contains("win")) return OS.WINDOWS;
-        if (osName.contains("mac")) return OS.MACOS;
-        if (osName.contains("linux")) return OS.LINUX;
-        if (osName.contains("unix")) return OS.LINUX;
-        return OS.UNKNOWN;
+    public static int getPlatform() {                    // I can't get the wrokingDirectory to be set
+        String osName = System.getProperty("os.name");   // correctly with the public static enum OS
+        if (osName.startsWith("Windows")) {              // thingy, despite getPlatform detects OS properly.
+			return 1;                                    // For now returning a integer matching the OS
+		} else if (osName.startsWith("Mac")) {           // seems to work fine, but please don't use this
+			return 2;                                    // dirty fix forever.
+		} else if (osName.startsWith("Linux")) {
+			return 3;
+		} else {
+			return 4;
+		}
     }
 
     public static File getWorkingDirectory() {
         String userHome = System.getProperty("user.home", ".");
         File workingDirectory;
-        switch (getPlatform().ordinal()) {
+        switch (getPlatform()) {
             case 1:
-            case 2:
-                workingDirectory = new File(userHome, ".minecraft/");
-                break;
-            case 3:
                 String applicationData = System.getenv("APPDATA");
                 String folder = applicationData != null ? applicationData : userHome;
 
                 workingDirectory = new File(folder, ".minecraft/");
-                break;
-            case 4:
+				break;
+			case 2:
                 workingDirectory = new File(userHome, "Library/Application Support/minecraft");
+                break;
+			case 3:
+                workingDirectory = new File(userHome, ".minecraft/");
                 break;
             default:
                 workingDirectory = new File(userHome, "minecraft/");
@@ -121,7 +124,7 @@ public class Util {
         return workingDirectory;
     }
 
-    public static enum OS {
-        WINDOWS, MACOS, SOLARIS, LINUX, UNKNOWN;
-    }
+    //public static enum OS {
+    //    WINDOWS, MACOS, LINUX, UNKNOWN;
+    //}
 }
