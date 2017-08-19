@@ -118,6 +118,9 @@ public class SwingUserInterface
     this.frame.setTitle("Minecraft Freedom Launcher 1.5.2");
     this.frame.setPreferredSize(new Dimension(900, 580));
     this.frame.setDefaultCloseOperation(2);
+    this.frame.pack();
+    this.frame.setLocationRelativeTo(null);
+    this.frame.setVisible(true);
     
     this.frame.addWindowListener(new WindowAdapter()
     {
