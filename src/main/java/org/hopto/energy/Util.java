@@ -105,7 +105,7 @@ public class Util {
         String userHome = System.getProperty("user.home", ".");
         File workingDirectory;
         switch (getPlatform().ordinal()) {
-        Case 0:
+        case 0:
                 String applicationData = System.getenv("APPDATA");
                 String folder = applicationData != null ? applicationData : userHome;
 
