@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" packages="net.minecraft,com.mojang">
+    <Appenders>
+        <Console name="SysOut" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%d{HH:mm:ss} %level]: %msg%n"/>
+        </Console>
+        <Queue name="DevelopmentConsole">
+            <PatternLayout pattern="[%d{HH:mm:ss} %level]: %msg%n"/>
+        </Queue>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="SysOut"/>
+            <AppenderRef ref="DevelopmentConsole"/>
+        </Root>
+    </Loggers>
+</Configuration>
