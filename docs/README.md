@@ -1,33 +1,53 @@
 This page is Minecraft Freedom Launcher's release notes. For the code, issues, pull requests or Wiki, visit [Repository's home page](https://github.com/Energy0124/MCFreedomLauncher).
 
-# Newest version : v2.0.0-prerelease
+# Newest version : v2.0.0-prerelease-02
 # Recommended version : v1.5.2.03
 
 ## Release notes :
+
+### v2.0.0-prerelease-02 Changes :
+**Do NOT use this pre-release version unless you're a developer and you want to contribute to the project.**
+- Miscellaneous improvements.
+#### Advanced changes (for developers) :
+- Ensured profiles can't be saved when deprecated JVM arguments are inputted (even if non functional).
+- Unified style of JOptionPanes.
+- Updated LauncherConstants to only contain strings and methods to convert strings to URIs or URLs.
+- Modified Strings, URIs and URLs in LauncherConstants to be less redundant.
+- Updated LauncherConstants. Field names are now alphabetically sorted, and naming scheme is updated for easier managements.
+- Updated "Support" text button to use normal font rather than small gray font.
+- Removed unnecessary code.
+- Optimized some imports.
+- De-suppressed warnings to make debugging easier in the future.
+- Replaced even more magic numbers.
+- General code improvements.
+- Updated pom.xml to skip tests as there is none.
+- Minor changes and refinements.
 
 ### v2.0.0-prerelease Changes :
 **Do NOT use this pre-release version unless you're a developer and you want to contribute to the project.**
 - Miscellaneous improvements.
 #### Advanced changes (for developers) :
 - Decompiled official launcher 1.6.73-j with Procyon as new code base. Fixed a lot of unintentional errors by not updating on previous code.
-- Fixed some exception handling.
+- Fixed some exception handlings.
 - Used Lambda expression and method references.
 - Properly added support for "Launcher Updates" tab.
 - Removed obsolete classes (SharedLauncherConstants, SidebarGridForm and StatusPanelForm).
 - Simplified some unnecessary code.
 - Added buttons (Forgot Migrated Email, Support, Minecraft Blog).
 - Added proper Java version check and resources check.
-- Added a public static forcefullyShutdown method and removed it from SwingUserInterface class.
+- Added a forcefullyShutdown method and removed it from SwingUserInterface class.
 - Simplified and modified some strings.
-- Replaced a lot of magic numbers (magic constants) with readable value.
+- Replaced a lot of magic numbers (magic constants) with readable values.
 - Notified users with a simple JOptionPane when exceptions of fake authentication are caught.
-- Expanded LauncherConstants to contain more Strings, URL and URI.
+- Expanded LauncherConstants to contain more Strings, URLs and URIs.
 - Updated default JVM arguments to boost performance and to not use deprecated features.
 - Updated profile editor to not accept the use of deprecated JVM arguments.
 - Fixed macOS app dock icon missing.
 - Removed deprecated methods.
 - Replaced code using deprecated methods from dependencies.
+- Replaced some Guava related code with native Java solutions.
 - General code improvements.
+- Updated pom.xml to use newer versions of dependencies.
 - Miscellaneous feature improvements.
 - (BUG) Premium mode does not work (Authentication exception : message is null).
 - (BUG) Launcher Logs tab only output logs when the launcher is run through IDE.
