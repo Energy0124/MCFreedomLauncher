@@ -2,7 +2,7 @@
 Free the new Minecraft Launcher!
 
 ## What is Minecraft Freedom Launcher?
-It's a Minecraft launcher with both cracked and premium modes.  
+It's a cracked Minecraft launcher.  
 Enhancements like full JavaFX UI and multi language support are planned for future releases.
 
 ## Is this project alive?
