@@ -5,6 +5,9 @@ import com.google.gson.GsonBuilder;
 import com.mojang.launcher.updater.LowerCaseEnumTypeAdapterFactory;
 import org.apache.commons.io.IOUtils;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -16,7 +19,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class LauncherConstants {
     // int A-Z
-    public static final int BUILD_NUMBER = 2017100800; // Info for updater, not yet implemented.
+    public static final int BUILD_NUMBER = 2017101100;
     public static final int FORMAT_PROFILES = 1;
     public static final int FORMAT_VERSION = 18;
     public static final int VERSION_MINIMUM_SUPPORTED_BOOTSTRAP = 4;
@@ -24,10 +27,8 @@ public class LauncherConstants {
     // String Image A-Z
     public static final String IMAGE_FAVICON = "/images/Favicon.png";
     public static final String IMAGE_LAUNCHER_BACKGROUND = "/images/Background.png";
-    public static final String IMAGE_MACOS_FAVICON = "icons/Favicon.icns";
+    public static final String IMAGE_MACOS_FAVICON = "/images/Favicon.icns";
     public static final String IMAGE_MINECRAFT_LOGO = "/images/Minecraft_Logo.png";
-    // String A-Z
-    private static final String LAUNCHER_VERSION = "2.0.0";
     // String JVM Arguments A-Z
     public static final String JVM_ARGUMENTS_DEFAULT = "-XX:InitialHeapSize=512M -XX:MaxHeapSize=2048M -XX:+UseG1GC";
     // String A-Z
@@ -94,6 +95,8 @@ public class LauncherConstants {
     public static final String MESSAGE_USERNAME_OR_PASSWORD_INCORRECT = "Sorry, but your username or password is incorrect!";
     public static final String MESSAGE_VERSIONS_DEVELOPMENT = "Are you sure you want to enable development builds?\nThey are not guaranteed to be stable and may corrupt your world.\nYou are advised to run this in a separate directory or run regular backups.";
     public static final String MESSAGE_VERSIONS_OLD = "These versions are very out of date and may be unstable. Any bugs, crashes, missing features or\nother nasties you may find will never be fixed in these versions.\nIt is strongly recommended you play these in separate directories to avoid corruption.";
+    // String A-Z
+    private static final String LAUNCHER_VERSION = "2.0.0.01";
 
     public static URI constantURI(final String input) {
         try {
@@ -128,6 +131,15 @@ public class LauncherConstants {
             }
         }
         return new LauncherProperties();
+    }
+
+    public static ImageIcon getFavicon() {
+        try {
+            return new ImageIcon((ImageIO.read(LauncherConstants.class.getResourceAsStream(IMAGE_FAVICON))).getScaledInstance(64, 64, Image.SCALE_SMOOTH));
+        } catch (IOException e) {
+            JOptionPane.showMessageDialog(null, "This launcher is corrupted. Please obtain a new one from the GitHub repository", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
     }
 
     public enum LauncherEnvironment {

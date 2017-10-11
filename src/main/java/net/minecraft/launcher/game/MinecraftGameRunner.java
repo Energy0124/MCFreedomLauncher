@@ -43,7 +43,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
-import static net.minecraft.launcher.LauncherConstants.*;
+import static net.minecraft.launcher.LauncherConstants.IMAGE_MACOS_FAVICON;
+import static net.minecraft.launcher.LauncherConstants.JVM_ARGUMENTS_DEFAULT;
 
 public class MinecraftGameRunner extends AbstractGameRunner implements GameProcessRunnable {
     private static final String CRASH_IDENTIFIER_MAGIC = "#@!@#";

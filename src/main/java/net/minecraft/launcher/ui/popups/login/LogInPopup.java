@@ -3,7 +3,6 @@ package net.minecraft.launcher.ui.popups.login;
 import com.mojang.launcher.OperatingSystem;
 import net.minecraft.launcher.Launcher;
 import net.minecraft.launcher.LauncherConstants;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

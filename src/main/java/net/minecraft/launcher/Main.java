@@ -1,6 +1,7 @@
 package net.minecraft.launcher;
 
 import io.github.lightwayup.minecraftfreedomlauncher.checker.RequirementsChecker;
+import io.github.lightwayup.minecraftfreedomlauncher.utility.LookAndFeelManager;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.WorkingDirectory;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -24,7 +25,8 @@ import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHE
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static void startLauncher(boolean skipUpdate, String[] args) {
+    public static void startLauncher(String[] args) {
+        LookAndFeelManager.setLookAndFeel(null);
         RequirementsChecker.checkRequirements();
         final OptionParser parser = new OptionParser();
         parser.allowsUnrecognizedOptions();

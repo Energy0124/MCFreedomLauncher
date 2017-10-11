@@ -143,7 +143,7 @@ public class Launcher {
             }
         }
         try {
-            JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_NOT_NATIVE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+            JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_NOT_NATIVE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");
         }

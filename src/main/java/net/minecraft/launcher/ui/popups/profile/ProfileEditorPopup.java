@@ -2,6 +2,7 @@ package net.minecraft.launcher.ui.popups.profile;
 
 import com.mojang.launcher.OperatingSystem;
 import net.minecraft.launcher.Launcher;
+import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
 import net.minecraft.launcher.profile.Profile;
 import net.minecraft.launcher.profile.ProfileManager;
@@ -18,7 +19,6 @@ import java.io.IOException;
 import java.util.Map;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static net.minecraft.launcher.LauncherConstants.IMAGE_FAVICON;
 import static net.minecraft.launcher.LauncherConstants.MESSAGE_DEPRECATED_JVM_ARGUMENTS_USED;
 import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
@@ -98,7 +98,7 @@ public class ProfileEditorPopup extends JPanel implements ActionListener {
                                 hasDeprecatedArguments = true;
                                 LOGGER.debug("Deprecated arguments are used, profile will not be saved");
                                 try {
-                                    JOptionPane.showMessageDialog(null, MESSAGE_DEPRECATED_JVM_ARGUMENTS_USED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                                    JOptionPane.showMessageDialog(null, MESSAGE_DEPRECATED_JVM_ARGUMENTS_USED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
                                 } catch (Exception e1) {
                                     LOGGER.debug("An Exception is caught!");
                                 }

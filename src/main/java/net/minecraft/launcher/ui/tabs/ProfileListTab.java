@@ -2,6 +2,7 @@ package net.minecraft.launcher.ui.tabs;
 
 import com.mojang.launcher.OperatingSystem;
 import net.minecraft.launcher.Launcher;
+import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
 import net.minecraft.launcher.profile.AuthenticationDatabase;
 import net.minecraft.launcher.profile.Profile;
@@ -23,10 +24,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static javax.swing.JOptionPane.WARNING_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
-import static net.minecraft.launcher.LauncherConstants.*;
+import static javax.swing.JOptionPane.*;
+import static net.minecraft.launcher.LauncherConstants.MESSAGE_CONFIRM_PROFILE_DELETION;
+import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
 public class ProfileListTab extends JScrollPane implements RefreshedProfilesListener {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -118,7 +118,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
             }
             final Profile current = ProfileListTab.this.dataModel.profiles.get(selection);
             try {
-                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, WARNING_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, WARNING_MESSAGE, LauncherConstants.getFavicon());
                 if (result == YES_OPTION) {
                     ProfileListTab.this.minecraftLauncher.getProfileManager().getProfiles().remove(current.getName());
                     try {

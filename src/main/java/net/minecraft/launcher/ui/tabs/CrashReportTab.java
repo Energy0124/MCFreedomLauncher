@@ -23,9 +23,7 @@ import java.util.Map;
 
 import static java.awt.GridBagConstraints.EAST;
 import static java.awt.GridBagConstraints.HORIZONTAL;
-import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
+import static javax.swing.JOptionPane.*;
 import static net.minecraft.launcher.LauncherConstants.*;
 
 public class CrashReportTab extends JPanel {
@@ -75,7 +73,7 @@ public class CrashReportTab extends JPanel {
 
     private void showPublishReportPrompt() {
         try {
-            final int result = JOptionPane.showConfirmDialog(this, MESSAGE_PUBLISH_CRASH_REPORT, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+            final int result = JOptionPane.showConfirmDialog(this, MESSAGE_PUBLISH_CRASH_REPORT, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, LauncherConstants.getFavicon());
             if (result == YES_OPTION) {
                 try {
                     HopperService.publishReport(this.minecraftLauncher.getLauncher().getProxy(), this.hopperServiceResponse.getReport());
@@ -91,13 +89,13 @@ public class CrashReportTab extends JPanel {
     private void showKnownProblemPopup() {
         if (this.hopperServiceResponse.getProblem().getUrl() == null) {
             try {
-                JOptionPane.showMessageDialog(this, this.hopperServiceResponse.getProblem().getDescription(), MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, INFORMATION_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                JOptionPane.showMessageDialog(this, this.hopperServiceResponse.getProblem().getDescription(), MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, INFORMATION_MESSAGE, LauncherConstants.getFavicon());
             } catch (Exception e) {
                 LOGGER.debug("An Exception is caught!");
             }
         } else {
             try {
-                final int result = JOptionPane.showConfirmDialog(this, this.hopperServiceResponse.getProblem().getDescription() + "\nDo you want to fix the problem?", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                final int result = JOptionPane.showConfirmDialog(this, this.hopperServiceResponse.getProblem().getDescription() + "\nDo you want to fix the problem?", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, LauncherConstants.getFavicon());
                 if (result == YES_OPTION) {
                     try {
                         OperatingSystem.openLink(new URI(this.hopperServiceResponse.getProblem().getUrl()));

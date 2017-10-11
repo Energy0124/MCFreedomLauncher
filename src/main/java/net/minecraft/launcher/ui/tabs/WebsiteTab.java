@@ -2,6 +2,7 @@ package net.minecraft.launcher.ui.tabs;
 
 import io.github.lightwayup.minecraftfreedomlauncher.utility.LauncherShutdown;
 import net.minecraft.launcher.Launcher;
+import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.ui.tabs.website.Browser;
 import net.minecraft.launcher.ui.tabs.website.JFXBrowser;
 import org.apache.logging.log4j.LogManager;
@@ -17,7 +18,6 @@ import java.net.URL;
 import java.net.URLClassLoader;
 
 import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static net.minecraft.launcher.LauncherConstants.IMAGE_FAVICON;
 import static net.minecraft.launcher.LauncherConstants.MESSAGE_JAVAFX_UNAVAILABLE;
 import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
@@ -31,7 +31,7 @@ public class WebsiteTab extends JPanel {
         this.browser = this.selectBrowser();
         if (browser == null) {
             try {
-                JOptionPane.showMessageDialog(null, MESSAGE_JAVAFX_UNAVAILABLE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                JOptionPane.showMessageDialog(null, MESSAGE_JAVAFX_UNAVAILABLE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
             } catch (Exception e) {
                 LOGGER.debug("An Exception is caught!");
             }

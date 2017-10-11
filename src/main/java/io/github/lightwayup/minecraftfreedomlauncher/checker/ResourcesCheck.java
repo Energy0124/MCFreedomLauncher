@@ -1,6 +1,7 @@
 package io.github.lightwayup.minecraftfreedomlauncher.checker;
 
 import com.mojang.launcher.OperatingSystem;
+import net.minecraft.launcher.LauncherConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -24,7 +25,7 @@ class ResourcesCheck {
                 if (minecraftLogoUrl == null || faviconUrl == null || backgroundUrl == null) {
                     LOGGER.warn("Images are gone!");
                     try {
-                        JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_CORRUPTED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                        JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_CORRUPTED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
                     } catch (Exception e1) {
                         LOGGER.debug("An Exception is caught!");
                     }
@@ -36,7 +37,7 @@ class ResourcesCheck {
                 if (minecraftLogoUrl == null || faviconUrl == null || backgroundUrl == null || macosFaviconUrl == null) {
                     LOGGER.warn("Images are gone!");
                     try {
-                        JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_CORRUPTED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                        JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_CORRUPTED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
                     } catch (Exception e2) {
                         LOGGER.debug("An Exception is caught!");
                     }
@@ -49,7 +50,7 @@ class ResourcesCheck {
             e.printStackTrace();
             LOGGER.error("Can't get image resources!");
             try {
-                JOptionPane.showMessageDialog(null, MESSAGE_UNKNOWN_ERROR, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                JOptionPane.showMessageDialog(null, MESSAGE_UNKNOWN_ERROR, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
             } catch (Exception e3) {
                 LOGGER.debug("An Exception is caught!");
             }

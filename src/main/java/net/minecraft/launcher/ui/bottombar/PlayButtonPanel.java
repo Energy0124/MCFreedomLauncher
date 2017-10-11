@@ -11,9 +11,8 @@ import net.minecraft.launcher.game.GameLaunchDispatcher;
 import net.minecraft.launcher.profile.ProfileManager;
 import net.minecraft.launcher.profile.RefreshedProfilesListener;
 import net.minecraft.launcher.profile.UserChangedListener;
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,9 +21,7 @@ import java.awt.event.MouseEvent;
 
 import static java.awt.GridBagConstraints.BOTH;
 import static java.awt.GridBagConstraints.CENTER;
-import static javax.swing.JOptionPane.QUESTION_MESSAGE;
-import static javax.swing.JOptionPane.YES_NO_OPTION;
-import static javax.swing.JOptionPane.YES_OPTION;
+import static javax.swing.JOptionPane.*;
 import static net.minecraft.launcher.LauncherConstants.*;
 
 public class PlayButtonPanel extends JPanel implements RefreshedVersionsListener, RefreshedProfilesListener, UserChangedListener {
@@ -45,7 +42,7 @@ public class PlayButtonPanel extends JPanel implements RefreshedVersionsListener
             final GameLaunchDispatcher dispatcher = PlayButtonPanel.this.getMinecraftLauncher().getLaunchDispatcher();
             if (dispatcher.isRunningInSameFolder()) {
                 try {
-                    final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) PlayButtonPanel.this.getMinecraftLauncher().getUserInterface()).getFrame(), MESSAGE_MORE_THAN_ONE_INSTANCE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, QUESTION_MESSAGE, new ImageIcon(IMAGE_FAVICON));
+                    final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) PlayButtonPanel.this.getMinecraftLauncher().getUserInterface()).getFrame(), MESSAGE_MORE_THAN_ONE_INSTANCE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, QUESTION_MESSAGE, LauncherConstants.getFavicon());
                     if (result == YES_OPTION) {
                         dispatcher.play();
                     }

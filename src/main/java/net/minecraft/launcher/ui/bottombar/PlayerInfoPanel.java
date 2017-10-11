@@ -14,8 +14,8 @@ import net.minecraft.launcher.profile.UserChangedListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import static java.awt.GridBagConstraints.HORIZONTAL;
@@ -26,19 +26,16 @@ public class PlayerInfoPanel extends JPanel implements RefreshedVersionsListener
     private final Launcher minecraftLauncher;
     private final JLabel welcomeText;
     private final JLabel versionText;
-    private final JLabel supportText;
     private final JButton switchUserButton;
+    private final JButton supportButton;
 
     public PlayerInfoPanel(final Launcher minecraftLauncher) {
-        final Font font = new JLabel().getFont().deriveFont(Font.PLAIN);
         this.welcomeText = new JLabel("", SwingConstants.CENTER);
         this.versionText = new JLabel("", SwingConstants.CENTER);
-        this.supportText = new JLabel("Support", SwingConstants.CENTER);
-        this.supportText.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        this.supportText.setFont(font);
-        this.supportText.addMouseListener(new MouseAdapter() {
+        this.supportButton = new JButton("Support");
+        this.supportButton.addActionListener(new ActionListener() {
             @Override
-            public void mouseClicked(final MouseEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 OperatingSystem.openLink(LauncherConstants.constantURI(URL_HELP));
             }
         });
@@ -72,7 +69,7 @@ public class PlayerInfoPanel extends JPanel implements RefreshedVersionsListener
         constraints.weightx = 0.5;
         constraints.fill = NONE;
         this.add(this.switchUserButton, constraints);
-        this.add(this.supportText, constraints);
+        this.add(this.supportButton, constraints);
         constraints.weightx = 0.0;
         ++constraints.gridy;
     }
