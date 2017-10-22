@@ -24,6 +24,10 @@ class JavaVersionCheck {
                 }
                 return false;
             } else {
+                if (Double.parseDouble(System.getProperty("java.specification.version")) > 9) {
+                    LOGGER.info("Java version newer than 9 is used.");
+                    JOptionPane.showMessageDialog(null, "You're using a Java version newer than 9. Support isn't guaranteed.", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, JOptionPane.INFORMATION_MESSAGE, LauncherConstants.getFavicon());
+                }
                 return true;
             }
         } catch (NullPointerException | SecurityException | IllegalArgumentException e) {
