@@ -9,14 +9,9 @@ import java.awt.*;
 public class LookAndFeelManager {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static void setLookAndFeel(Component[] components) {
+    public static void setLookAndFeel() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            if (components != null) {
-                for (Component component : components) {
-                    SwingUtilities.updateComponentTreeUI(component);
-                }
-            }
         } catch (Exception e) {
             LOGGER.error("Your java failed to provide normal and cross-platform look and feel");
         }

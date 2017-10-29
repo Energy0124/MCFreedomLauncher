@@ -26,7 +26,7 @@ public class Main {
     private static final Logger LOGGER = LogManager.getLogger();
 
     public static void startLauncher(String[] args) {
-        LookAndFeelManager.setLookAndFeel(null);
+        LookAndFeelManager.setLookAndFeel();
         RequirementsChecker.checkRequirements();
         final OptionParser parser = new OptionParser();
         parser.allowsUnrecognizedOptions();
