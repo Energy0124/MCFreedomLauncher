@@ -1,8 +1,11 @@
 # IntelliJ IDEA
-.idea/
 *.iml
 
-# Eclipse
+# NetBeans
+nbproject/
+
+# Project configuration
+.idea/
 *.project
 
 # Output
