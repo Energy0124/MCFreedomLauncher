@@ -5,9 +5,6 @@ import com.google.gson.GsonBuilder;
 import com.mojang.launcher.updater.LowerCaseEnumTypeAdapterFactory;
 import org.apache.commons.io.IOUtils;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -19,7 +16,7 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class LauncherConstants {
     // int A-Z
-    public static final int BUILD_NUMBER = 2017101100;
+    public static final int BUILD_NUMBER = 2017103000;
     public static final int FORMAT_PROFILES = 1;
     public static final int FORMAT_VERSION = 18;
     public static final int VERSION_MINIMUM_SUPPORTED_BOOTSTRAP = 4;
@@ -131,15 +128,6 @@ public class LauncherConstants {
             }
         }
         return new LauncherProperties();
-    }
-
-    public static ImageIcon getFavicon() {
-        try {
-            return new ImageIcon((ImageIO.read(LauncherConstants.class.getResourceAsStream(IMAGE_FAVICON))).getScaledInstance(64, 64, Image.SCALE_SMOOTH));
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "This launcher is corrupted. Please obtain a new one from the GitHub repository", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
     }
 
     public enum LauncherEnvironment {

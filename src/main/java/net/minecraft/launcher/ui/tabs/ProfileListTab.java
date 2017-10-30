@@ -1,8 +1,8 @@
 package net.minecraft.launcher.ui.tabs;
 
 import com.mojang.launcher.OperatingSystem;
+import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import net.minecraft.launcher.Launcher;
-import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
 import net.minecraft.launcher.profile.AuthenticationDatabase;
 import net.minecraft.launcher.profile.Profile;
@@ -118,7 +118,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
             }
             final Profile current = ProfileListTab.this.dataModel.profiles.get(selection);
             try {
-                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, WARNING_MESSAGE, LauncherConstants.getFavicon());
+                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, WARNING_MESSAGE, IconManager.getIcon());
                 if (result == YES_OPTION) {
                     ProfileListTab.this.minecraftLauncher.getProfileManager().getProfiles().remove(current.getName());
                     try {

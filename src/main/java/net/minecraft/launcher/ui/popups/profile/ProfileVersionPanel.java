@@ -5,7 +5,7 @@ import com.mojang.launcher.events.RefreshedVersionsListener;
 import com.mojang.launcher.updater.VersionManager;
 import com.mojang.launcher.updater.VersionSyncInfo;
 import com.mojang.launcher.versions.Version;
-import net.minecraft.launcher.LauncherConstants;
+import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import net.minecraft.launcher.SwingUserInterface;
 import net.minecraft.launcher.game.MinecraftReleaseType;
 import net.minecraft.launcher.profile.Profile;
@@ -91,7 +91,7 @@ public class ProfileVersionPanel extends JPanel implements RefreshedVersionsList
                     }
                     if (e.getStateChange() == ItemEvent.SELECTED && type.getType().getPopupWarning() != null) {
                         try {
-                            final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileVersionPanel.this.editor.getMinecraftLauncher().getUserInterface()).getFrame(), type.getType().getPopupWarning() + "\n\nAre you sure you want to continue?", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, QUESTION_MESSAGE, LauncherConstants.getFavicon());
+                            final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileVersionPanel.this.editor.getMinecraftLauncher().getUserInterface()).getFrame(), type.getType().getPopupWarning() + "\n\nAre you sure you want to continue?", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
                             this.isUpdating = true;
                             if (result == YES_OPTION) {
                                 type.setSelected(true);

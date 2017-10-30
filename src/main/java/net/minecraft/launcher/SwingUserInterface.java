@@ -7,6 +7,7 @@ import com.mojang.launcher.OperatingSystem;
 import com.mojang.launcher.events.GameOutputLogProcessor;
 import com.mojang.launcher.updater.DownloadProgress;
 import com.mojang.launcher.versions.CompleteVersion;
+import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.LauncherShutdown;
 import net.minecraft.launcher.game.MinecraftGameRunner;
 import net.minecraft.launcher.profile.Profile;
@@ -124,7 +125,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     public void showOutdatedNotice() {
         this.frame.getContentPane().removeAll();
         try {
-            JOptionPane.showMessageDialog(this.frame, MESSAGE_LAUNCHER_OUTDATED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
+            JOptionPane.showMessageDialog(this.frame, MESSAGE_LAUNCHER_OUTDATED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");
         }
@@ -218,7 +219,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     @Override
     public void gameLaunchFailure(final String reason) {
         try {
-            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(SwingUserInterface.this.frame, reason, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon()));
+            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(SwingUserInterface.this.frame, reason, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, null/*IconManager.getIcon()*/));
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");
         }
@@ -247,7 +248,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     @Override
     public boolean shouldDowngradeProfiles() {
         try {
-            final int result = JOptionPane.showConfirmDialog(this.frame, MESSAGE_LAUNCHER_NEWER_VERSION_USED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, ERROR_MESSAGE, LauncherConstants.getFavicon());
+            final int result = JOptionPane.showConfirmDialog(this.frame, MESSAGE_LAUNCHER_NEWER_VERSION_USED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, ERROR_MESSAGE, IconManager.getIcon());
             return result == YES_OPTION;
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");

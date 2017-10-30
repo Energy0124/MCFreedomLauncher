@@ -1,8 +1,8 @@
 package net.minecraft.launcher.ui.tabs;
 
+import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.LauncherShutdown;
 import net.minecraft.launcher.Launcher;
-import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.ui.tabs.website.Browser;
 import net.minecraft.launcher.ui.tabs.website.JFXBrowser;
 import org.apache.logging.log4j.LogManager;
@@ -31,7 +31,7 @@ public class WebsiteTab extends JPanel {
         this.browser = this.selectBrowser();
         if (browser == null) {
             try {
-                JOptionPane.showMessageDialog(null, MESSAGE_JAVAFX_UNAVAILABLE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
+                JOptionPane.showMessageDialog(null, MESSAGE_JAVAFX_UNAVAILABLE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
             } catch (Exception e) {
                 LOGGER.debug("An Exception is caught!");
             }

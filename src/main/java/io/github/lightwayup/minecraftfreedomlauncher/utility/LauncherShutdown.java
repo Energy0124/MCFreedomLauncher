@@ -13,6 +13,11 @@ public class LauncherShutdown {
     public static void forcefullyShutdown(String reason) {
         LOGGER.debug("Launcher is shutting down because " + reason + " ...");
         try {
+            IconManager.closeIconStream();
+        } catch (Exception e) {
+            LOGGER.error("Unable to close stream");
+        }
+        try {
             final Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override

@@ -3,6 +3,7 @@ package net.minecraft.launcher.ui.tabs;
 import com.mojang.launcher.Http;
 import com.mojang.launcher.OperatingSystem;
 import com.mojang.launcher.versions.CompleteVersion;
+import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import net.minecraft.hopper.HopperService;
 import net.minecraft.hopper.SubmitResponse;
 import net.minecraft.launcher.Launcher;
@@ -73,7 +74,7 @@ public class CrashReportTab extends JPanel {
 
     private void showPublishReportPrompt() {
         try {
-            final int result = JOptionPane.showConfirmDialog(this, MESSAGE_PUBLISH_CRASH_REPORT, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, LauncherConstants.getFavicon());
+            final int result = JOptionPane.showConfirmDialog(this, MESSAGE_PUBLISH_CRASH_REPORT, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, IconManager.getIcon());
             if (result == YES_OPTION) {
                 try {
                     HopperService.publishReport(this.minecraftLauncher.getLauncher().getProxy(), this.hopperServiceResponse.getReport());
@@ -89,13 +90,13 @@ public class CrashReportTab extends JPanel {
     private void showKnownProblemPopup() {
         if (this.hopperServiceResponse.getProblem().getUrl() == null) {
             try {
-                JOptionPane.showMessageDialog(this, this.hopperServiceResponse.getProblem().getDescription(), MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, INFORMATION_MESSAGE, LauncherConstants.getFavicon());
+                JOptionPane.showMessageDialog(this, this.hopperServiceResponse.getProblem().getDescription(), MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, INFORMATION_MESSAGE, IconManager.getIcon());
             } catch (Exception e) {
                 LOGGER.debug("An Exception is caught!");
             }
         } else {
             try {
-                final int result = JOptionPane.showConfirmDialog(this, this.hopperServiceResponse.getProblem().getDescription() + "\nDo you want to fix the problem?", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, LauncherConstants.getFavicon());
+                final int result = JOptionPane.showConfirmDialog(this, this.hopperServiceResponse.getProblem().getDescription() + "\nDo you want to fix the problem?", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, INFORMATION_MESSAGE, IconManager.getIcon());
                 if (result == YES_OPTION) {
                     try {
                         OperatingSystem.openLink(new URI(this.hopperServiceResponse.getProblem().getUrl()));

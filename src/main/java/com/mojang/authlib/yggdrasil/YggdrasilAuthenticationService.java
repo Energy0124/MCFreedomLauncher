@@ -11,7 +11,7 @@ import com.mojang.authlib.properties.PropertyMap;
 import com.mojang.authlib.yggdrasil.response.ProfileSearchResultsResponse;
 import com.mojang.authlib.yggdrasil.response.Response;
 import com.mojang.util.UUIDTypeAdapter;
-import net.minecraft.launcher.LauncherConstants;
+import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import net.minecraft.launcher.ui.popups.login.LogInPopup;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -106,7 +106,7 @@ public class YggdrasilAuthenticationService extends HttpAuthenticationService {
         } catch (IOException | JsonParseException | IllegalStateException e) {
             LOGGER.error("Cannot contact authentication server");
             try {
-                JOptionPane.showMessageDialog(null, MESSAGE_CANNOT_CONNECT_ONE + " " + MESSAGE_TRY_AGAIN, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
+                JOptionPane.showMessageDialog(null, MESSAGE_CANNOT_CONNECT_ONE + " " + MESSAGE_TRY_AGAIN, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
             } catch (Exception e1) {
                 LOGGER.debug("Unable to get favicon");
             }

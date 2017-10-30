@@ -14,6 +14,7 @@ import com.mojang.launcher.updater.download.assets.AssetIndex;
 import com.mojang.launcher.versions.CompleteVersion;
 import com.mojang.launcher.versions.Version;
 import com.mojang.util.UUIDTypeAdapter;
+import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -143,7 +144,7 @@ public class Launcher {
             }
         }
         try {
-            JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_NOT_NATIVE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, LauncherConstants.getFavicon());
+            JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_NOT_NATIVE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");
         }
