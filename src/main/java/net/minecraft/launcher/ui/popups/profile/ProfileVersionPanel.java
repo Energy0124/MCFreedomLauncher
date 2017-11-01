@@ -5,7 +5,8 @@ import com.mojang.launcher.events.RefreshedVersionsListener;
 import com.mojang.launcher.updater.VersionManager;
 import com.mojang.launcher.updater.VersionSyncInfo;
 import com.mojang.launcher.versions.Version;
-import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
+import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
 import net.minecraft.launcher.game.MinecraftReleaseType;
 import net.minecraft.launcher.profile.Profile;
@@ -23,7 +24,6 @@ import java.util.Set;
 
 import static java.awt.GridBagConstraints.*;
 import static javax.swing.JOptionPane.*;
-import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
 public class ProfileVersionPanel extends JPanel implements RefreshedVersionsListener {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -91,7 +91,7 @@ public class ProfileVersionPanel extends JPanel implements RefreshedVersionsList
                     }
                     if (e.getStateChange() == ItemEvent.SELECTED && type.getType().getPopupWarning() != null) {
                         try {
-                            final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileVersionPanel.this.editor.getMinecraftLauncher().getUserInterface()).getFrame(), type.getType().getPopupWarning() + "\n\nAre you sure you want to continue?", MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
+                            final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileVersionPanel.this.editor.getMinecraftLauncher().getUserInterface()).getFrame(), type.getType().getPopupWarning() + "\nAre you sure you want to continue?", new LauncherConstants().windowTitle, YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
                             this.isUpdating = true;
                             if (result == YES_OPTION) {
                                 type.setSelected(true);

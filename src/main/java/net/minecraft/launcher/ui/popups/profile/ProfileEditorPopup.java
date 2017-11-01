@@ -1,8 +1,8 @@
 package net.minecraft.launcher.ui.popups.profile;
 
 import com.mojang.launcher.OperatingSystem;
-import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import net.minecraft.launcher.Launcher;
+import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
 import net.minecraft.launcher.profile.Profile;
 import net.minecraft.launcher.profile.ProfileManager;
@@ -17,10 +17,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.util.Map;
-
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static net.minecraft.launcher.LauncherConstants.MESSAGE_DEPRECATED_JVM_ARGUMENTS_USED;
-import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
 public class ProfileEditorPopup extends JPanel implements ActionListener {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -56,7 +52,7 @@ public class ProfileEditorPopup extends JPanel implements ActionListener {
 
     public static void showEditProfileDialog(final Launcher minecraftLauncher, final Profile profile) {
         final JFrame frame = ((SwingUserInterface) minecraftLauncher.getUserInterface()).getFrame();
-        final JDialog dialog = new JDialog(frame, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, true);
+        final JDialog dialog = new JDialog(frame, new LauncherConstants().windowTitle, true);
         final ProfileEditorPopup editor = new ProfileEditorPopup(minecraftLauncher, profile);
         dialog.setPreferredSize(new Dimension(1024, 576));
         dialog.setResizable(false);
@@ -86,54 +82,28 @@ public class ProfileEditorPopup extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(final ActionEvent e) {
         if (e.getSource() == this.saveButton) {
-            boolean hasDeprecatedArguments = false;
             try {
-                if (ProfileJavaPanel.javaArgsCustom.isSelected()) {
-                    LOGGER.debug("Custom JVM arguments are used");
-                    String JVMArguments = ProfileJavaPanel.javaArgsField.getText();
-                    if (JVMArguments != null) {
-                        String[] deprecatedJVMArguments = {"Xincgc", "Xrun", "CMS", "PermSize", "UseSplitVerifier", "UseStringCache", "MaxTenuringThreshold=6", "UseConcMarkSweepGC"};
-                        for (String deprecatedJVMArgument : deprecatedJVMArguments) {
-                            if (JVMArguments.toLowerCase().contains(deprecatedJVMArgument.toLowerCase())) {
-                                hasDeprecatedArguments = true;
-                                LOGGER.debug("Deprecated arguments are used, profile will not be saved");
-                                try {
-                                    JOptionPane.showMessageDialog(null, MESSAGE_DEPRECATED_JVM_ARGUMENTS_USED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
-                                } catch (Exception e1) {
-                                    LOGGER.debug("An Exception is caught!");
-                                }
-                            }
-                        }
+                final ProfileManager manager = this.minecraftLauncher.getProfileManager();
+                final Map<String, Profile> profiles = manager.getProfiles();
+                final String selected = manager.getSelectedProfile().getName();
+                if (!this.originalProfile.getName().equals(this.profile.getName())) {
+                    profiles.remove(this.originalProfile.getName());
+                    while (profiles.containsKey(this.profile.getName())) {
+                        this.profile.setName(this.profile.getName() + "_");
                     }
-                } else {
-                    LOGGER.debug("Custom JVM arguments aren't used");
-                    hasDeprecatedArguments = false;
                 }
-                if (!hasDeprecatedArguments) {
-                    final ProfileManager manager = this.minecraftLauncher.getProfileManager();
-                    final Map<String, Profile> profiles = manager.getProfiles();
-                    final String selected = manager.getSelectedProfile().getName();
-                    if (!this.originalProfile.getName().equals(this.profile.getName())) {
-                        profiles.remove(this.originalProfile.getName());
-                        while (profiles.containsKey(this.profile.getName())) {
-                            this.profile.setName(this.profile.getName() + "_");
-                        }
-                    }
-                    profiles.put(this.profile.getName(), this.profile);
-                    if (selected.equals(this.originalProfile.getName())) {
-                        manager.setSelectedProfile(this.profile.getName());
-                    }
-                    manager.saveProfiles();
-                    manager.fireRefreshEvent();
+                profiles.put(this.profile.getName(), this.profile);
+                if (selected.equals(this.originalProfile.getName())) {
+                    manager.setSelectedProfile(this.profile.getName());
                 }
+                manager.saveProfiles();
+                manager.fireRefreshEvent();
             } catch (IOException ex) {
                 ProfileEditorPopup.LOGGER.error("Couldn't save profiles whilst editing " + this.profile.getName(), ex);
             } catch (Exception ex) {
                 ProfileEditorPopup.LOGGER.error("An Exception is caught!");
             }
-            if (!hasDeprecatedArguments) {
-                this.closeWindow();
-            }
+            this.closeWindow();
         } else if (e.getSource() == this.browseButton) {
             OperatingSystem.openFolder((this.profile.getGameDir() == null) ? this.minecraftLauncher.getLauncher().getWorkingDirectory() : this.profile.getGameDir());
         } else {

@@ -14,7 +14,6 @@ import com.mojang.launcher.updater.download.assets.AssetIndex;
 import com.mojang.launcher.versions.CompleteVersion;
 import com.mojang.launcher.versions.Version;
 import com.mojang.util.UUIDTypeAdapter;
-import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
 import joptsimple.OptionException;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -43,8 +42,8 @@ import java.util.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static java.text.DateFormat.MEDIUM;
 import static java.text.DateFormat.MONTH_FIELD;
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
-import static net.minecraft.launcher.LauncherConstants.*;
+import static net.minecraft.launcher.LauncherConstants.FORMAT_VERSION;
+import static net.minecraft.launcher.LauncherConstants.VERSION_MINIMUM_SUPPORTED_BOOTSTRAP;
 
 public class Launcher {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -130,35 +129,6 @@ public class Launcher {
                 Launcher.LOGGER.info("Deleted empty directory {}", file);
             }
         }
-    }
-
-    public File findNativeLauncher() {
-        String programData = System.getenv("ProgramData");
-        if (programData == null) {
-            programData = System.getenv("ALLUSERSPROFILE");
-        }
-        if (programData != null) {
-            final File shortcut = new File(programData, MINECRAFT_SHORTCUT_LINK);
-            if (shortcut.isFile()) {
-                return shortcut;
-            }
-        }
-        try {
-            JOptionPane.showMessageDialog(null, MESSAGE_LAUNCHER_NOT_NATIVE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
-        } catch (Exception e) {
-            LOGGER.debug("An Exception is caught!");
-        }
-        return null;
-    }
-
-    public void runNativeLauncher(final File executable, final String[] args) {
-        final ProcessBuilder pb = new ProcessBuilder("cmd", "/c", executable.getAbsolutePath());
-        try {
-            pb.start();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.exit(0);
     }
 
     private void setupErrorHandling() {

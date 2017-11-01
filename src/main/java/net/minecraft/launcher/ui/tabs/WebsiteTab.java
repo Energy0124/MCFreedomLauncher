@@ -1,6 +1,6 @@
 package net.minecraft.launcher.ui.tabs;
 
-import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.DialogDisplay;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.LauncherShutdown;
 import net.minecraft.launcher.Launcher;
 import net.minecraft.launcher.ui.tabs.website.Browser;
@@ -17,9 +17,7 @@ import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLClassLoader;
 
-import static javax.swing.JOptionPane.ERROR_MESSAGE;
 import static net.minecraft.launcher.LauncherConstants.MESSAGE_JAVAFX_UNAVAILABLE;
-import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
 public class WebsiteTab extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -30,11 +28,7 @@ public class WebsiteTab extends JPanel {
     public WebsiteTab(final Launcher minecraftLauncher) {
         this.browser = this.selectBrowser();
         if (browser == null) {
-            try {
-                JOptionPane.showMessageDialog(null, MESSAGE_JAVAFX_UNAVAILABLE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
-            } catch (Exception e) {
-                LOGGER.debug("An Exception is caught!");
-            }
+            DialogDisplay.showError(MESSAGE_JAVAFX_UNAVAILABLE);
             LauncherShutdown.forcefullyShutdown("JavaFX is unavailable");
         }
         this.minecraftLauncher = minecraftLauncher;

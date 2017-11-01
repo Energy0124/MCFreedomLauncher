@@ -1,8 +1,9 @@
 package net.minecraft.launcher.ui.tabs;
 
 import com.mojang.launcher.OperatingSystem;
-import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import net.minecraft.launcher.Launcher;
+import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
 import net.minecraft.launcher.profile.AuthenticationDatabase;
 import net.minecraft.launcher.profile.Profile;
@@ -26,7 +27,6 @@ import java.util.List;
 
 import static javax.swing.JOptionPane.*;
 import static net.minecraft.launcher.LauncherConstants.MESSAGE_CONFIRM_PROFILE_DELETION;
-import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
 public class ProfileListTab extends JScrollPane implements RefreshedProfilesListener {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -118,7 +118,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
             }
             final Profile current = ProfileListTab.this.dataModel.profiles.get(selection);
             try {
-                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, WARNING_MESSAGE, IconManager.getIcon());
+                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, new LauncherConstants().windowTitle, YES_NO_OPTION, WARNING_MESSAGE, IconManager.getIcon());
                 if (result == YES_OPTION) {
                     ProfileListTab.this.minecraftLauncher.getProfileManager().getProfiles().remove(current.getName());
                     try {
@@ -205,10 +205,10 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
         @Override
         public String getColumnName(final int column) {
             switch (column) {
-                case 0: {
+                case COLUMN_NAME: {
                     return "Version name";
                 }
-                case 1: {
+                case COLUMN_VERSION: {
                     return "Version";
                 }
                 default: {

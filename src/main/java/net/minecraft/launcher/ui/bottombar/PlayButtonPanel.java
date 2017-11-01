@@ -4,7 +4,7 @@ import com.mojang.launcher.OperatingSystem;
 import com.mojang.launcher.events.RefreshedVersionsListener;
 import com.mojang.launcher.game.GameInstanceStatus;
 import com.mojang.launcher.updater.VersionManager;
-import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import net.minecraft.launcher.Launcher;
 import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
@@ -43,7 +43,7 @@ public class PlayButtonPanel extends JPanel implements RefreshedVersionsListener
             final GameLaunchDispatcher dispatcher = PlayButtonPanel.this.getMinecraftLauncher().getLaunchDispatcher();
             if (dispatcher.isRunningInSameFolder()) {
                 try {
-                    final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) PlayButtonPanel.this.getMinecraftLauncher().getUserInterface()).getFrame(), MESSAGE_MORE_THAN_ONE_INSTANCE, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
+                    final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) PlayButtonPanel.this.getMinecraftLauncher().getUserInterface()).getFrame(), MESSAGE_MORE_THAN_ONE_INSTANCE, new LauncherConstants().windowTitle, YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
                     if (result == YES_OPTION) {
                         dispatcher.play();
                     }

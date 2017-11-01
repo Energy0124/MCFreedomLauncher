@@ -1,5 +1,6 @@
 package io.github.lightwayup.minecraftfreedomlauncher.utility;
 
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

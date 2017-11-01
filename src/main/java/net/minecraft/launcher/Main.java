@@ -1,7 +1,7 @@
 package net.minecraft.launcher;
 
 import io.github.lightwayup.minecraftfreedomlauncher.checker.RequirementsChecker;
-import io.github.lightwayup.minecraftfreedomlauncher.utility.LookAndFeelManager;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.LookAndFeelManager;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.WorkingDirectory;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -20,7 +20,6 @@ import java.net.Proxy;
 import java.util.List;
 
 import static net.minecraft.launcher.LauncherConstants.IMAGE_FAVICON;
-import static net.minecraft.launcher.LauncherConstants.MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
 
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -51,7 +50,7 @@ public class Main {
         Main.LOGGER.debug("About to create JFrame.");
         final Proxy finalProxy = proxy;
         final JFrame frame = new JFrame();
-        frame.setTitle(MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE);
+        frame.setTitle(new LauncherConstants().windowTitle);
         frame.setPreferredSize(new Dimension(1280, 720));
         try {
             final InputStream in = Launcher.class.getResourceAsStream(IMAGE_FAVICON);

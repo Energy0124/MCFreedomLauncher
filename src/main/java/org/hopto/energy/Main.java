@@ -6,11 +6,8 @@ import org.apache.logging.log4j.Logger;
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static void main(final String[] args) {
-        LOGGER.debug("main() called!");
-        if (args.length != 0) {
-            LOGGER.info("Launching with additional arguments, hope nothing breaks.");
-        }
+    public static void main(String[] args) {
+        LOGGER.info("Starting launcher with " + args.length + " argument(s). Some arguments might not be supported");
         net.minecraft.launcher.Main.startLauncher(args);
     }
 }

@@ -1,4 +1,4 @@
-package io.github.lightwayup.minecraftfreedomlauncher.utility;
+package io.github.lightwayup.minecraftfreedomlauncher.userinterface;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

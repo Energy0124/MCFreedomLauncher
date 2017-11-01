@@ -7,7 +7,8 @@ import com.mojang.launcher.OperatingSystem;
 import com.mojang.launcher.events.GameOutputLogProcessor;
 import com.mojang.launcher.updater.DownloadProgress;
 import com.mojang.launcher.versions.CompleteVersion;
-import io.github.lightwayup.minecraftfreedomlauncher.utility.IconManager;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.DialogDisplay;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.LauncherShutdown;
 import net.minecraft.launcher.game.MinecraftGameRunner;
 import net.minecraft.launcher.profile.Profile;
@@ -45,30 +46,6 @@ public class SwingUserInterface implements MinecraftUserInterface {
     public SwingUserInterface(final Launcher minecraftLauncher, final JFrame frame) {
         this.minecraftLauncher = minecraftLauncher;
         this.frame = frame;
-        setLookAndFeel();
-    }
-
-    private static void setLookAndFeel() {
-        final JFrame frame = new JFrame();
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            SwingUserInterface.LOGGER.error("Your java failed to provide normal and cross-platform look and feel"); // Cross-platform feel is returned if normal one isn't available.
-        }
-        final JPanel panel = new JPanel();
-        panel.setBorder(BorderFactory.createTitledBorder("Test"));
-        frame.add(panel);
-        try {
-            frame.pack();
-        } catch (Throwable ignored2) {
-            SwingUserInterface.LOGGER.error("Custom theme detected, falling back onto cross-platform theme");
-            try {
-                UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-            } catch (Throwable ex) {
-                SwingUserInterface.LOGGER.error("Unexpected exception setting look and feel", ex);
-            }
-        }
-        frame.dispose();
     }
 
     public void showLoginPrompt(final Launcher minecraftLauncher, final LogInPopup.Callback callback) {
@@ -80,7 +57,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
 
     public void initializeFrame() {
         this.frame.getContentPane().removeAll();
-        this.frame.setTitle(MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE);
+        this.frame.setTitle(new LauncherConstants().windowTitle);
         this.frame.setPreferredSize(new Dimension(1280, 720));
         this.frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.frame.setResizable(false);
@@ -124,11 +101,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     @Override
     public void showOutdatedNotice() {
         this.frame.getContentPane().removeAll();
-        try {
-            JOptionPane.showMessageDialog(this.frame, MESSAGE_LAUNCHER_OUTDATED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, IconManager.getIcon());
-        } catch (Exception e) {
-            LOGGER.debug("An Exception is caught!");
-        }
+        DialogDisplay.showError(MESSAGE_LAUNCHER_OUTDATED);
         try {
             if (OperatingSystem.getCurrentPlatform() == OperatingSystem.WINDOWS) {
                 OperatingSystem.openLink(new URI(URL_BOOTSTRAP_DOWNLOAD + ".exe"));
@@ -219,7 +192,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     @Override
     public void gameLaunchFailure(final String reason) {
         try {
-            SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(SwingUserInterface.this.frame, reason, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, ERROR_MESSAGE, null/*IconManager.getIcon()*/));
+            SwingUtilities.invokeLater(() -> DialogDisplay.showError(reason));
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");
         }
@@ -248,7 +221,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     @Override
     public boolean shouldDowngradeProfiles() {
         try {
-            final int result = JOptionPane.showConfirmDialog(this.frame, MESSAGE_LAUNCHER_NEWER_VERSION_USED, MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE, YES_NO_OPTION, ERROR_MESSAGE, IconManager.getIcon());
+            final int result = JOptionPane.showConfirmDialog(this.frame, MESSAGE_LAUNCHER_NEWER_VERSION_USED, new LauncherConstants().windowTitle, YES_NO_OPTION, ERROR_MESSAGE, IconManager.getIcon());
             return result == YES_OPTION;
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");
@@ -258,7 +231,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
 
     @Override
     public String getTitle() {
-        return MINECRAFT_FREEDOM_LAUNCHER_WINDOW_TITLE;
+        return new LauncherConstants().windowTitle;
     }
 
     public JFrame getFrame() {
