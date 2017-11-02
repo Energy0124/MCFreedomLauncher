@@ -2,7 +2,6 @@ package com.mojang.launcher.game.process.direct;
 
 import com.mojang.launcher.events.GameOutputLogProcessor;
 import com.mojang.launcher.game.process.GameProcessRunnable;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -10,13 +9,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class DirectProcessInputMonitor extends Thread {
+class DirectProcessInputMonitor extends Thread {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final DirectGameProcess process;
     private final GameOutputLogProcessor logProcessor;
 
-    public DirectProcessInputMonitor(final DirectGameProcess process, final GameOutputLogProcessor logProcessor) {
+    DirectProcessInputMonitor(final DirectGameProcess process, final GameOutputLogProcessor logProcessor) {
         this.process = process;
         this.logProcessor = logProcessor;
     }
@@ -37,7 +36,11 @@ public class DirectProcessInputMonitor extends Thread {
             } catch (IOException ex) {
                 DirectProcessInputMonitor.LOGGER.error(ex);
             } finally {
-                IOUtils.closeQuietly(reader);
+                try {
+                    reader.close();
+                } catch (IOException e) {
+                    LOGGER.warn("Unable to close reader");
+                }
             }
         }
         final GameProcessRunnable onExit = this.process.getExitRunnable();

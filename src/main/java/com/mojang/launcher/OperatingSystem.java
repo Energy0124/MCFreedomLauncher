@@ -90,7 +90,7 @@ public enum OperatingSystem {
         return this.name;
     }
 
-    public String[] getAliases() {
+    private String[] getAliases() {
         return this.aliases;
     }
 

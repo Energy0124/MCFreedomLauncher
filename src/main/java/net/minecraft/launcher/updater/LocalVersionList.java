@@ -24,7 +24,10 @@ public class LocalVersionList extends FileBasedVersionList {
         this.baseDirectory = baseDirectory;
         this.baseVersionsDir = new File(this.baseDirectory, "versions");
         if (!this.baseVersionsDir.isDirectory()) {
-            this.baseVersionsDir.mkdirs();
+            boolean success = this.baseVersionsDir.mkdirs();
+            if (!success) {
+                LOGGER.error("Unable to create directories");
+            }
         }
     }
 
@@ -73,7 +76,10 @@ public class LocalVersionList extends FileBasedVersionList {
         final String text = this.serializeVersion(version);
         final File target = new File(this.baseVersionsDir, version.getId() + "/" + version.getId() + ".json");
         if (target.getParentFile() != null) {
-            target.getParentFile().mkdirs();
+            boolean success = target.getParentFile().mkdirs();
+            if (!success) {
+                LOGGER.error("Unable to create directories");
+            }
         }
         final PrintWriter writer = new PrintWriter(target);
         writer.print(text);

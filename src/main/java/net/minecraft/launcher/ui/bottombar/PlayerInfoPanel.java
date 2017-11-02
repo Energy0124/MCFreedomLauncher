@@ -14,8 +14,6 @@ import net.minecraft.launcher.profile.UserChangedListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.List;
 
 import static java.awt.GridBagConstraints.HORIZONTAL;
@@ -33,12 +31,7 @@ public class PlayerInfoPanel extends JPanel implements RefreshedVersionsListener
         this.welcomeText = new JLabel("", SwingConstants.CENTER);
         this.versionText = new JLabel("", SwingConstants.CENTER);
         this.supportButton = new JButton("Support");
-        this.supportButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OperatingSystem.openLink(LauncherConstants.constantURI(URL_HELP));
-            }
-        });
+        this.supportButton.addActionListener(e -> OperatingSystem.openLink(LauncherConstants.constantURI(URL_HELP)));
         this.switchUserButton = new JButton("Switch User");
         this.minecraftLauncher = minecraftLauncher;
         minecraftLauncher.getProfileManager().addRefreshedProfilesListener(this);
@@ -49,7 +42,7 @@ public class PlayerInfoPanel extends JPanel implements RefreshedVersionsListener
         this.switchUserButton.addActionListener(e -> minecraftLauncher.getUserInterface().showLoginPrompt());
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setLayout(new GridBagLayout());
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = HORIZONTAL;
@@ -79,7 +72,7 @@ public class PlayerInfoPanel extends JPanel implements RefreshedVersionsListener
         SwingUtilities.invokeLater(PlayerInfoPanel.this::checkState);
     }
 
-    public void checkState() {
+    private void checkState() {
         final ProfileManager profileManager = this.minecraftLauncher.getProfileManager();
         final UserAuthentication auth = (profileManager.getSelectedUser() == null) ? null : profileManager.getAuthDatabase().getByUUID(profileManager.getSelectedUser());
         if (auth == null || !auth.isLoggedIn()) {

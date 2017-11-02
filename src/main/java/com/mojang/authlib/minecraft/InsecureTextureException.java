@@ -11,7 +11,7 @@ public class InsecureTextureException extends RuntimeException {
         super(message);
     }
 
-    public static class OutdatedTextureException extends InsecureTextureException {
+    static class OutdatedTextureException extends InsecureTextureException {
         private final Date validFrom;
         private final Calendar limit;
 
@@ -22,7 +22,7 @@ public class InsecureTextureException extends RuntimeException {
         }
     }
 
-    public static class WrongTextureOwnerException extends InsecureTextureException {
+    static class WrongTextureOwnerException extends InsecureTextureException {
         private final GameProfile expected;
         private final UUID resultId;
         private final String resultName;
@@ -35,7 +35,7 @@ public class InsecureTextureException extends RuntimeException {
         }
     }
 
-    public static class MissingTextureException extends InsecureTextureException {
+    private static class MissingTextureException extends InsecureTextureException {
         public MissingTextureException() {
             super("No texture information found");
         }

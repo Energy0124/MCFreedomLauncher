@@ -112,7 +112,7 @@ public class Library {
         return this;
     }
 
-    public String getArtifactBaseDir() {
+    private String getArtifactBaseDir() {
         if (this.name == null) {
             throw new IllegalStateException("Cannot get artifact dir of empty/blank artifact");
         }
@@ -131,7 +131,7 @@ public class Library {
         return String.format("%s/%s", this.getArtifactBaseDir(), this.getArtifactFilename(classifier));
     }
 
-    public String getArtifactFilename(final String classifier) {
+    private String getArtifactFilename(final String classifier) {
         if (this.name == null) {
             throw new IllegalStateException("Cannot get artifact filename of empty/blank artifact");
         }

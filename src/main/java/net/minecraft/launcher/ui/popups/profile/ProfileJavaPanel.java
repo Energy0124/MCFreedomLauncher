@@ -10,9 +10,9 @@ import java.awt.*;
 import static java.awt.GridBagConstraints.*;
 import static net.minecraft.launcher.LauncherConstants.JVM_ARGUMENTS_DEFAULT;
 
-public class ProfileJavaPanel extends JPanel {
-    protected static final JCheckBox javaArgsCustom = new JCheckBox("Java Virtual Machine Arguments:");
-    protected static final JTextField javaArgsField = new JTextField();
+class ProfileJavaPanel extends JPanel {
+    private static final JCheckBox javaArgsCustom = new JCheckBox("Java Virtual Machine Arguments:");
+    private static final JTextField javaArgsField = new JTextField();
     private final ProfileEditorPopup editor;
     private final JCheckBox javaPathCustom;
     private final JTextField javaPathField;
@@ -28,7 +28,7 @@ public class ProfileJavaPanel extends JPanel {
         this.addEventHandlers();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(2, 2, 2, 2);
         constraints.anchor = WEST;
@@ -49,7 +49,7 @@ public class ProfileJavaPanel extends JPanel {
         ++constraints.gridy;
     }
 
-    protected void fillDefaultValues() {
+    private void fillDefaultValues() {
         final String javaPath = this.editor.getProfile().getJavaPath();
         if (javaPath != null) {
             this.javaPathCustom.setSelected(true);
@@ -70,7 +70,7 @@ public class ProfileJavaPanel extends JPanel {
         this.updateJavaArgsState();
     }
 
-    protected void addEventHandlers() {
+    private void addEventHandlers() {
         this.javaPathCustom.addItemListener(e -> ProfileJavaPanel.this.updateJavaPathState());
         this.javaPathField.getDocument().addDocumentListener(new DocumentListener() {
             @Override

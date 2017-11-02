@@ -12,7 +12,7 @@ import java.io.InputStream;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public abstract class FileBasedVersionList extends VersionList {
-    public String getContent(final String path) throws IOException {
+    String getContent(final String path) throws IOException {
         return IOUtils.toString(this.getFileInputStream(path), UTF_8).replaceAll("\\r\\n", "\r").replaceAll("\\r", "\n");
     }
 

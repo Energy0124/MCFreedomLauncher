@@ -74,7 +74,7 @@ public abstract class HttpAuthenticationService extends BaseAuthenticationServic
         return this.proxy;
     }
 
-    protected HttpURLConnection createUrlConnection(final URL url) throws IOException {
+    private HttpURLConnection createUrlConnection(final URL url) throws IOException {
         Validate.notNull(url);
         HttpAuthenticationService.LOGGER.debug("Opening connection to " + url);
         final HttpURLConnection connection = (HttpURLConnection) url.openConnection(this.proxy);
@@ -99,7 +99,13 @@ public abstract class HttpAuthenticationService extends BaseAuthenticationServic
             outputStream = connection.getOutputStream();
             IOUtils.write(postAsBytes, outputStream);
         } finally {
-            IOUtils.closeQuietly(outputStream);
+            if (outputStream != null) {
+                try {
+                    outputStream.close();
+                } catch (IOException e) {
+                    LOGGER.warn("Unable to close output stream");
+                }
+            }
         }
         HttpAuthenticationService.LOGGER.debug("Reading data from " + url);
         InputStream inputStream = null;
@@ -110,7 +116,13 @@ public abstract class HttpAuthenticationService extends BaseAuthenticationServic
             HttpAuthenticationService.LOGGER.debug("Response: " + result);
             return result;
         } catch (IOException e) {
-            IOUtils.closeQuietly(inputStream);
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e1) {
+                    LOGGER.warn("Unable to close input stream");
+                }
+            }
             inputStream = connection.getErrorStream();
             if (inputStream != null) {
                 HttpAuthenticationService.LOGGER.debug("Reading error page from " + url);
@@ -122,7 +134,13 @@ public abstract class HttpAuthenticationService extends BaseAuthenticationServic
             HttpAuthenticationService.LOGGER.debug("Request failed", e);
             throw e;
         } finally {
-            IOUtils.closeQuietly(inputStream);
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    LOGGER.warn("Unable to close input stream");
+                }
+            }
         }
     }
 
@@ -138,7 +156,13 @@ public abstract class HttpAuthenticationService extends BaseAuthenticationServic
             HttpAuthenticationService.LOGGER.debug("Response: " + result);
             return result;
         } catch (IOException e) {
-            IOUtils.closeQuietly(inputStream);
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e1) {
+                    LOGGER.warn("Unable to close input stream");
+                }
+            }
             inputStream = connection.getErrorStream();
             if (inputStream != null) {
                 HttpAuthenticationService.LOGGER.debug("Reading error page from " + url);
@@ -150,7 +174,13 @@ public abstract class HttpAuthenticationService extends BaseAuthenticationServic
             HttpAuthenticationService.LOGGER.debug("Request failed", e);
             throw e;
         } finally {
-            IOUtils.closeQuietly(inputStream);
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    LOGGER.warn("Unable to close input stream");
+                }
+            }
         }
     }
 }

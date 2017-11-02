@@ -46,7 +46,7 @@ public class ProfileSelectionPanel extends JPanel implements ActionListener, Ite
         minecraftLauncher.getProfileManager().addRefreshedProfilesListener(this);
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setLayout(new GridBagLayout());
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = HORIZONTAL;
@@ -72,7 +72,7 @@ public class ProfileSelectionPanel extends JPanel implements ActionListener, Ite
         SwingUtilities.invokeLater(ProfileSelectionPanel.this::populateProfiles);
     }
 
-    public void populateProfiles() {
+    private void populateProfiles() {
         final String previous = this.minecraftLauncher.getProfileManager().getSelectedProfile().getName();
         Profile selected = null;
         final List<Profile> profiles = Lists.newArrayList(this.minecraftLauncher.getProfileManager().getProfiles().values());
@@ -129,7 +129,7 @@ public class ProfileSelectionPanel extends JPanel implements ActionListener, Ite
         }
     }
 
-    public Launcher getMinecraftLauncher() {
+    private Launcher getMinecraftLauncher() {
         return this.minecraftLauncher;
     }
 

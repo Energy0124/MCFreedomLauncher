@@ -75,7 +75,7 @@ public class GameOutputTab extends JScrollPane implements GameOutputLogProcessor
         return this.minecraftLauncher;
     }
 
-    public void print(final String line) {
+    private void print(final String line) {
         if (!SwingUtilities.isEventDispatchThread()) {
             SwingUtilities.invokeLater(() -> GameOutputTab.this.print(line));
             return;

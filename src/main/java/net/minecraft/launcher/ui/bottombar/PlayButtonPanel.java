@@ -56,7 +56,7 @@ public class PlayButtonPanel extends JPanel implements RefreshedVersionsListener
         });
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setLayout(new GridBagLayout());
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = BOTH;
@@ -105,7 +105,7 @@ public class PlayButtonPanel extends JPanel implements RefreshedVersionsListener
         SwingUtilities.invokeLater(PlayButtonPanel.this::checkState);
     }
 
-    public Launcher getMinecraftLauncher() {
+    private Launcher getMinecraftLauncher() {
         return this.minecraftLauncher;
     }
 

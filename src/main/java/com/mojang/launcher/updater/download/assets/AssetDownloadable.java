@@ -3,7 +3,6 @@ package com.mojang.launcher.updater.download.assets;
 import com.mojang.launcher.updater.download.Downloadable;
 import com.mojang.launcher.updater.download.MonitoringInputStream;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -32,7 +31,7 @@ public class AssetDownloadable extends Downloadable {
         this.destination = destination;
     }
 
-    protected static String createPathFromHash(final String hash) {
+    private static String createPathFromHash(final String hash) {
         return hash.substring(0, 2) + "/" + hash;
     }
 
@@ -58,12 +57,10 @@ public class AssetDownloadable extends Downloadable {
         }
         if (localCompressed != null && localCompressed.isFile()) {
             final String localCompressedHash = Downloadable.getDigest(localCompressed, "SHA", 40);
-            try {
+            if (localCompressedHash != null) {
                 if (localCompressedHash.equalsIgnoreCase(this.asset.getCompressedHash())) {
                     return this.decompressAsset(localAsset, localCompressed);
                 }
-            } catch (NullPointerException e) {
-                LOGGER.debug("A NullPointerException is caught!");
             }
             AssetDownloadable.LOGGER.warn("Had local compressed but it was the wrong hash... expected {} but had {}", this.asset.getCompressedHash(), localCompressedHash);
             FileUtils.deleteQuietly(localCompressed);
@@ -106,7 +103,7 @@ public class AssetDownloadable extends Downloadable {
         return this.status.name + " " + this.name;
     }
 
-    protected String decompressAsset(final File localAsset, final File localCompressed) throws IOException {
+    private String decompressAsset(final File localAsset, final File localCompressed) throws IOException {
         this.status = Status.EXTRACTING;
         final OutputStream outputStream = FileUtils.openOutputStream(localAsset);
         final InputStream inputStream = new GZIPInputStream(FileUtils.openInputStream(localCompressed));
@@ -114,8 +111,12 @@ public class AssetDownloadable extends Downloadable {
         try {
             hash = Downloadable.copyAndDigest(inputStream, outputStream, "SHA", 40);
         } finally {
-            IOUtils.closeQuietly(outputStream);
-            IOUtils.closeQuietly(inputStream);
+            try {
+                outputStream.close();
+                inputStream.close();
+            } catch (IOException e) {
+                LOGGER.warn("Unable to close input or output stream");
+            }
         }
         this.status = Status.DOWNLOADING;
         if (hash.equalsIgnoreCase(this.asset.getHash())) {

@@ -53,7 +53,7 @@ public class LogInPopup extends JPanel implements ActionListener {
         return premiumModeCheckBox.isSelected();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new EmptyBorder(5, 15, 5, 15));
         this.setPreferredSize(new Dimension(1024, 576));

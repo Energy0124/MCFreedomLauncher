@@ -1,6 +1,8 @@
 package com.mojang.launcher.updater.download;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,6 +17,8 @@ import static java.nio.charset.StandardCharsets.UTF_8;
 public class ChecksummedDownloadable extends Downloadable {
     private String localHash;
     private String expectedHash;
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     public ChecksummedDownloadable(final Proxy proxy, final URL remoteFile, final File localFile, final boolean forceDownload) {
         super(proxy, remoteFile, localFile, forceDownload);
@@ -39,7 +43,11 @@ public class ChecksummedDownloadable extends Downloadable {
                     } catch (IOException e2) {
                         this.expectedHash = "";
                     } finally {
-                        IOUtils.closeQuietly(inputStream);
+                        try {
+                            inputStream.close();
+                        } catch (IOException e) {
+                            LOGGER.warn("Unable to close input stream");
+                        }
                     }
                 } else {
                     this.expectedHash = "";

@@ -1,15 +1,10 @@
 package com.mojang.authlib;
 
 public class Agent {
-    public static final Agent MINECRAFT = new Agent("Minecraft", 1);
+    public static final Agent MINECRAFT = new Agent();
 
-    private final String name;
-    private final int version;
-
-    public Agent(final String name, final int version) {
-        this.name = name;
-        this.version = version;
-    }
+    private final String name = "Minecraft";
+    private final int version = 1;
 
     public String getName() {
         return this.name;

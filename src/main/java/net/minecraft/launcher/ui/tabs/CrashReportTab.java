@@ -107,7 +107,7 @@ public class CrashReportTab extends JPanel {
         }
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.add(this.crashInfoPane, "North");
         this.add(this.scrollPane, "Center");
         this.reportEditor.setText(this.report);
@@ -115,18 +115,18 @@ public class CrashReportTab extends JPanel {
     }
 
     private class CrashInfoPane extends JPanel implements ActionListener {
-        public static final String INFO = MESSAGE_GAME_CRASHED;
+        static final String INFO = MESSAGE_GAME_CRASHED;
         private final JButton submitButton;
         private final JButton openFileButton;
 
-        protected CrashInfoPane(final Launcher minecraftLauncher) {
+        CrashInfoPane(final Launcher minecraftLauncher) {
             this.submitButton = new JButton("Report to Mojang");
             this.openFileButton = new JButton("Open report file");
             this.submitButton.addActionListener(this);
             this.openFileButton.addActionListener(this);
         }
 
-        protected void createInterface() {
+        void createInterface() {
             this.setLayout(new GridBagLayout());
             final GridBagConstraints constraints = new GridBagConstraints();
             constraints.anchor = EAST;

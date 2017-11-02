@@ -15,7 +15,7 @@ import java.util.UUID;
 
 import static net.minecraft.launcher.LauncherConstants.*;
 
-public class AnalyticsSubmission {
+class AnalyticsSubmission {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final String SESSION_ID = UUID.randomUUID().toString();
     private static final DateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");

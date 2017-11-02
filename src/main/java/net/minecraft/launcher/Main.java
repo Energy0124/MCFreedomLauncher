@@ -46,11 +46,13 @@ public class Main {
             }
         }
         final File workingDirectory = optionSet.valueOf(workDirOption);
-        workingDirectory.mkdirs();
+        boolean success = workingDirectory.mkdirs();
+        if (!success) {
+            LOGGER.error("Unable to create directories");
+        }
         Main.LOGGER.debug("About to create JFrame.");
         final Proxy finalProxy = proxy;
-        final JFrame frame = new JFrame();
-        frame.setTitle(new LauncherConstants().windowTitle);
+        final JFrame frame = new JFrame(new LauncherConstants().windowTitle);
         frame.setPreferredSize(new Dimension(1280, 720));
         try {
             final InputStream in = Launcher.class.getResourceAsStream(IMAGE_FAVICON);

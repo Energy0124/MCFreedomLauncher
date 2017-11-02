@@ -98,7 +98,7 @@ public class CompleteMinecraftVersion implements CompleteVersion {
         return this.releaseTime;
     }
 
-    public List<Library> getLibraries() {
+    private List<Library> getLibraries() {
         return this.libraries;
     }
 
@@ -225,7 +225,7 @@ public class CompleteMinecraftVersion implements CompleteVersion {
         return this.resolve(versionManager, Sets.newHashSet());
     }
 
-    protected CompleteMinecraftVersion resolve(final MinecraftVersionManager versionManager, final Set<String> resolvedSoFar) throws IOException {
+    private CompleteMinecraftVersion resolve(final MinecraftVersionManager versionManager, final Set<String> resolvedSoFar) throws IOException {
         if (this.inheritsFrom == null) {
             return this;
         }

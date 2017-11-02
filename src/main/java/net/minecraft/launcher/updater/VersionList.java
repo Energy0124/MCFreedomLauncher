@@ -16,13 +16,13 @@ import net.minecraft.launcher.game.MinecraftReleaseTypeFactory;
 import java.io.IOException;
 import java.util.*;
 
-public abstract class VersionList {
-    protected final Gson gson;
-    protected final Map<String, Version> versionsByName;
-    protected final List<Version> versions;
-    protected final Map<MinecraftReleaseType, Version> latestVersions;
+abstract class VersionList {
+    final Gson gson;
+    final Map<String, Version> versionsByName;
+    final List<Version> versions;
+    final Map<MinecraftReleaseType, Version> latestVersions;
 
-    public VersionList() {
+    VersionList() {
         this.versionsByName = new HashMap<>();
         this.versions = new ArrayList<>();
         this.latestVersions = Maps.newEnumMap(MinecraftReleaseType.class);
@@ -39,7 +39,7 @@ public abstract class VersionList {
         return this.versions;
     }
 
-    public Version getLatestVersion(final MinecraftReleaseType type) {
+    Version getLatestVersion(final MinecraftReleaseType type) {
         if (type == null) {
             throw new IllegalArgumentException("Type cannot be null");
         }
@@ -55,7 +55,7 @@ public abstract class VersionList {
 
     public abstract CompleteMinecraftVersion getCompleteVersion(final Version p0) throws IOException;
 
-    protected void replacePartialWithFull(final PartialVersion version, final CompleteVersion complete) {
+    void replacePartialWithFull(final PartialVersion version, final CompleteVersion complete) {
         Collections.replaceAll(this.versions, version, complete);
         this.versionsByName.put(version.getId(), complete);
         if (this.latestVersions.get(version.getType()) == version) {
@@ -63,7 +63,7 @@ public abstract class VersionList {
         }
     }
 
-    protected void clearCache() {
+    void clearCache() {
         this.versionsByName.clear();
         this.versions.clear();
         this.latestVersions.clear();
@@ -106,7 +106,7 @@ public abstract class VersionList {
         }
     }
 
-    public void setLatestVersion(final Version version) {
+    void setLatestVersion(final Version version) {
         if (version == null) {
             throw new IllegalArgumentException("Cannot set latest version to null");
         }
@@ -124,7 +124,7 @@ public abstract class VersionList {
         this.setLatestVersion(version);
     }
 
-    public String serializeVersion(final CompleteVersion version) {
+    String serializeVersion(final CompleteVersion version) {
         if (version == null) {
             throw new IllegalArgumentException("Cannot serialize null!");
         }

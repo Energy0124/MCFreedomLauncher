@@ -58,7 +58,7 @@ public class CompatibilityRule {
         public OSRestriction() {
         }
 
-        public OSRestriction(final OSRestriction osRestriction) {
+        OSRestriction(final OSRestriction osRestriction) {
             this.name = osRestriction.name;
             this.version = osRestriction.version;
             this.arch = osRestriction.arch;
@@ -76,7 +76,7 @@ public class CompatibilityRule {
             return this.arch;
         }
 
-        public boolean isCurrentOperatingSystem() {
+        boolean isCurrentOperatingSystem() {
             if (this.name != null && this.name != OperatingSystem.getCurrentPlatform()) {
                 return false;
             }

@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 
-public class TexturedPanel extends JPanel {
+class TexturedPanel extends JPanel {
     private static final Logger LOGGER = LogManager.getLogger();
     private static final long serialVersionUID = 1L;
 
@@ -39,7 +39,7 @@ public class TexturedPanel extends JPanel {
         graphics.drawImage(this.image, 0, 0, width * 2, height * 2, null);
     }
 
-    protected void copyImage(final int width, final int height) {
+    private void copyImage(final int width, final int height) {
         final Graphics imageGraphics = this.image.getGraphics();
         for (int x = 0; x <= width / 32; ++x) {
             for (int y = 0; y <= height / 32; ++y) {

@@ -29,7 +29,7 @@ public class VersionFilter<T extends ReleaseType> {
     }
 
     @SafeVarargs
-    public final void includeTypes(final T... types) {
+    final void includeTypes(final T... types) {
         if (types != null) {
             Collections.addAll(this.types, types);
         }

@@ -57,7 +57,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
         minecraftLauncher.getProfileManager().addRefreshedProfilesListener(this);
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.popupMenu.add(this.addProfileButton);
         this.popupMenu.add(this.copyProfileButton);
         this.popupMenu.add(this.deleteProfileButton);
@@ -171,7 +171,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
         });
     }
 
-    public Launcher getMinecraftLauncher() {
+    private Launcher getMinecraftLauncher() {
         return this.minecraftLauncher;
     }
 
@@ -237,7 +237,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
             }
         }
 
-        public void setProfiles(final Collection<Profile> profiles) {
+        void setProfiles(final Collection<Profile> profiles) {
             this.profiles.clear();
             this.profiles.addAll(profiles);
             Collections.sort(this.profiles);

@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.*;
 
 public class AuthenticationDatabase {
-    public static final String DEMO_UUID_PREFIX = "demo-";
+    private static final String DEMO_UUID_PREFIX = "demo-";
     private final Map<String, UserAuthentication> authById;
     private final AuthenticationService authenticationService;
 
@@ -24,7 +24,7 @@ public class AuthenticationDatabase {
         this.authenticationService = authenticationService;
     }
 
-    public static String getUserFromDemoUUID(final String uuid) {
+    private static String getUserFromDemoUUID(final String uuid) {
         if (uuid.startsWith(DEMO_UUID_PREFIX) && uuid.length() > DEMO_UUID_PREFIX.length()) {
             return "Demo User " + uuid.substring(DEMO_UUID_PREFIX.length());
         }
@@ -100,7 +100,7 @@ public class AuthenticationDatabase {
             return new AuthenticationDatabase(services, authService);
         }
 
-        protected Map<String, Map<String, Object>> deserializeCredentials(final JsonObject json, final JsonDeserializationContext context) {
+        Map<String, Map<String, Object>> deserializeCredentials(final JsonObject json, final JsonDeserializationContext context) {
             final Map<String, Map<String, Object>> result = new LinkedHashMap<>();
             for (final Map.Entry<String, JsonElement> authEntry : json.entrySet()) {
                 final Map<String, Object> credentials = new LinkedHashMap<>();

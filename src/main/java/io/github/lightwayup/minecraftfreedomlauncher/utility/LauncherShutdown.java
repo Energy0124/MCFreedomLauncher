@@ -1,6 +1,5 @@
 package io.github.lightwayup.minecraftfreedomlauncher.utility;
 
-import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -13,11 +12,6 @@ public class LauncherShutdown {
 
     public static void forcefullyShutdown(String reason) {
         LOGGER.debug("Launcher is shutting down because " + reason + " ...");
-        try {
-            IconManager.closeIconStream();
-        } catch (Exception e) {
-            LOGGER.error("Unable to close stream");
-        }
         try {
             final Timer timer = new Timer();
             timer.schedule(new TimerTask() {

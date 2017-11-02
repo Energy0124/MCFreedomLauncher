@@ -109,7 +109,10 @@ public class MinecraftGameRunner extends AbstractGameRunner implements GameProce
         }
         this.nativeDir = new File(this.getLauncher().getWorkingDirectory(), "versions/" + this.getVersion().getId() + "/" + this.getVersion().getId() + "-natives-" + System.nanoTime());
         if (!this.nativeDir.isDirectory()) {
-            this.nativeDir.mkdirs();
+            boolean success = this.nativeDir.mkdirs();
+            if (!success) {
+                LOGGER.error("Unable to create directories");
+            }
         }
         MinecraftGameRunner.LOGGER.info("Unpacking natives to " + this.nativeDir);
         try {
@@ -138,7 +141,10 @@ public class MinecraftGameRunner extends AbstractGameRunner implements GameProce
         }
         final File serverResourcePacksDir = new File(gameDirectory, "server-resource-packs");
         if (!serverResourcePacksDir.exists()) {
-            serverResourcePacksDir.mkdirs();
+            boolean success = serverResourcePacksDir.mkdirs();
+            if (!success) {
+                LOGGER.error("Unable to create directories");
+            }
         }
         final GameProcessBuilder processBuilder = new GameProcessBuilder(MoreObjects.firstNonNull(this.selectedProfile.getJavaPath(), OperatingSystem.getCurrentPlatform().getJavaDir()));
         processBuilder.withSysOutFilter(input -> input.contains(CRASH_IDENTIFIER_MAGIC));
@@ -202,7 +208,7 @@ public class MinecraftGameRunner extends AbstractGameRunner implements GameProce
         this.minecraftLauncher.performCleanups();
     }
 
-    protected CompleteMinecraftVersion getVersion() {
+    private CompleteMinecraftVersion getVersion() {
         return (CompleteMinecraftVersion) this.version;
     }
 
@@ -295,7 +301,7 @@ public class MinecraftGameRunner extends AbstractGameRunner implements GameProce
         final IOFileFilter migratableFilter = FileFilterUtils.notFileFilter(FileFilterUtils.or(FileFilterUtils.nameFileFilter("indexes"), FileFilterUtils.nameFileFilter("objects"), FileFilterUtils.nameFileFilter("virtual"), FileFilterUtils.nameFileFilter("skins")));
         for (final File file : (TreeSet<File>) new TreeSet(FileUtils.listFiles(sourceDir, TrueFileFilter.TRUE, migratableFilter))) {
             final String hash = Downloadable.getDigest(file, "SHA-1", 40);
-            try {
+            if (hash != null) {
                 final File destinationFile = new File(objectsDir, hash.substring(0, 2) + "/" + hash);
                 if (!destinationFile.exists()) {
                     MinecraftGameRunner.LOGGER.info("Migrated old asset {} into {}", file, destinationFile);
@@ -305,8 +311,6 @@ public class MinecraftGameRunner extends AbstractGameRunner implements GameProce
                         MinecraftGameRunner.LOGGER.error("Couldn't migrate old asset", e);
                     }
                 }
-            } catch (NullPointerException e) {
-                LOGGER.debug("A NullPointerException is caught!");
             }
             FileUtils.deleteQuietly(file);
         }
@@ -338,7 +342,10 @@ public class MinecraftGameRunner extends AbstractGameRunner implements GameProce
                         }
                         final File targetFile = new File(targetDir, entry.getName());
                         if (targetFile.getParentFile() != null) {
-                            targetFile.getParentFile().mkdirs();
+                            boolean success = targetFile.getParentFile().mkdirs();
+                            if (!success) {
+                                LOGGER.error("Unable to create directories");
+                            }
                         }
                         if (entry.isDirectory()) {
                             continue;

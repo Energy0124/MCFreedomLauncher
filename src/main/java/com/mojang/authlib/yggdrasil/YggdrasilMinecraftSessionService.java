@@ -47,7 +47,7 @@ public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionServic
     private final Gson gson;
     private final LoadingCache<GameProfile, GameProfile> insecureProfiles;
 
-    protected YggdrasilMinecraftSessionService(final YggdrasilAuthenticationService authenticationService) {
+    YggdrasilMinecraftSessionService(final YggdrasilAuthenticationService authenticationService) {
         super(authenticationService);
         this.gson = new GsonBuilder().registerTypeAdapter(UUID.class, new UUIDTypeAdapter()).create();
         this.insecureProfiles = CacheBuilder.newBuilder().expireAfterWrite(6L, TimeUnit.HOURS).build(new CacheLoader<GameProfile, GameProfile>() {
@@ -135,7 +135,7 @@ public class YggdrasilMinecraftSessionService extends HttpMinecraftSessionServic
         return this.fillGameProfile(profile, true);
     }
 
-    protected GameProfile fillGameProfile(final GameProfile profile, final boolean requireSecure) {
+    private GameProfile fillGameProfile(final GameProfile profile, final boolean requireSecure) {
         try {
             URL url = HttpAuthenticationService.constantURL(URL_SESSION_PROFILE + UUIDTypeAdapter.fromUUID(profile.getId()));
             url = HttpAuthenticationService.concatenateURL(url, "unsigned=" + !requireSecure);

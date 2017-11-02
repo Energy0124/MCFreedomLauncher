@@ -11,7 +11,7 @@ import java.io.File;
 
 import static java.awt.GridBagConstraints.*;
 
-public class ProfileInfoPanel extends JPanel {
+class ProfileInfoPanel extends JPanel {
     private final ProfileEditorPopup editor;
     private final JCheckBox gameDirCustom;
     private final JTextField profileName;
@@ -41,7 +41,7 @@ public class ProfileInfoPanel extends JPanel {
         this.addEventHandlers();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(2, 2, 2, 2);
         constraints.anchor = WEST;
@@ -96,7 +96,7 @@ public class ProfileInfoPanel extends JPanel {
         }
     }
 
-    protected void fillDefaultValues() {
+    private void fillDefaultValues() {
         this.profileName.setText(this.editor.getProfile().getName());
         final File gameDir = this.editor.getProfile().getGameDir();
         if (gameDir != null) {
@@ -127,7 +127,7 @@ public class ProfileInfoPanel extends JPanel {
         this.updateLauncherVisibilityState();
     }
 
-    protected void addEventHandlers() {
+    private void addEventHandlers() {
         this.profileName.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(final DocumentEvent e) {

@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class BaseUserAuthentication implements UserAuthentication {
-    protected static final String STORAGE_KEY_PROFILE_NAME = "displayName";
-    protected static final String STORAGE_KEY_PROFILE_ID = "uuid";
-    protected static final String STORAGE_KEY_PROFILE_PROPERTIES = "profileProperties";
-    protected static final String STORAGE_KEY_USER_NAME = "username";
-    protected static final String STORAGE_KEY_USER_ID = "userid";
-    protected static final String STORAGE_KEY_USER_PROPERTIES = "userProperties";
+    private static final String STORAGE_KEY_PROFILE_NAME = "displayName";
+    private static final String STORAGE_KEY_PROFILE_ID = "uuid";
+    private static final String STORAGE_KEY_PROFILE_PROPERTIES = "profileProperties";
+    private static final String STORAGE_KEY_USER_NAME = "username";
+    private static final String STORAGE_KEY_USER_ID = "userid";
+    private static final String STORAGE_KEY_USER_PROPERTIES = "userProperties";
     private static final Logger LOGGER = LogManager.getLogger();
 
     private final AuthenticationService authenticationService;
@@ -30,7 +30,7 @@ public abstract class BaseUserAuthentication implements UserAuthentication {
     private GameProfile selectedProfile;
     private UserType userType;
 
-    protected BaseUserAuthentication(final AuthenticationService authenticationService) {
+    BaseUserAuthentication(final AuthenticationService authenticationService) {
         this.userProperties = new PropertyMap();
         Validate.notNull(authenticationService);
         this.authenticationService = authenticationService;
@@ -203,7 +203,7 @@ public abstract class BaseUserAuthentication implements UserAuthentication {
         return result.toString();
     }
 
-    public AuthenticationService getAuthenticationService() {
+    AuthenticationService getAuthenticationService() {
         return this.authenticationService;
     }
 

@@ -67,7 +67,7 @@ public class YggdrasilUserAuthentication extends HttpUserAuthentication {
         }
     }
 
-    protected void logInWithPassword() throws AuthenticationException {
+    private void logInWithPassword() throws AuthenticationException {
         if (StringUtils.isBlank(this.getUsername())) {
             throw new InvalidCredentialsException("Invalid username");
         }
@@ -101,7 +101,7 @@ public class YggdrasilUserAuthentication extends HttpUserAuthentication {
         this.updateUserProperties(user);
     }
 
-    protected void updateUserProperties(final User user) {
+    private void updateUserProperties(final User user) {
         if (user == null) {
             return;
         }
@@ -110,7 +110,7 @@ public class YggdrasilUserAuthentication extends HttpUserAuthentication {
         }
     }
 
-    protected void logInWithToken() throws AuthenticationException {
+    private void logInWithToken() throws AuthenticationException {
         if (StringUtils.isBlank(this.getUserID())) {
             if (!StringUtils.isBlank(this.getUsername())) {
                 throw new InvalidCredentialsException("Invalid uuid & username");
@@ -149,7 +149,7 @@ public class YggdrasilUserAuthentication extends HttpUserAuthentication {
         this.updateUserProperties(response.getUser());
     }
 
-    protected boolean checkTokenValidity() {
+    private boolean checkTokenValidity() {
         final ValidateRequest request = new ValidateRequest(this);
         try {
             this.getAuthenticationService().makeRequest(YggdrasilUserAuthentication.ROUTE_VALIDATE, request, Response.class, getUsername());

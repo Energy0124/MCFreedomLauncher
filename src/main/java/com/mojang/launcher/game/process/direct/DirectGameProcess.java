@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 
 public class DirectGameProcess extends AbstractGameProcess {
     private static final int MAX_SYSOUT_LINES = 5;
-    protected final DirectProcessInputMonitor monitor;
+    private final DirectProcessInputMonitor monitor;
     private final Process process;
     private final Collection<String> sysOutLines;
 

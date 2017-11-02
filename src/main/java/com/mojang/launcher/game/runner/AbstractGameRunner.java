@@ -28,7 +28,7 @@ public abstract class AbstractGameRunner implements GameRunner, DownloadListener
     protected CompleteVersion version;
     private GameInstanceStatus status;
 
-    public AbstractGameRunner() {
+    protected AbstractGameRunner() {
         this.lock = new Object();
         this.jobs = new ArrayList<>();
         this.status = GameInstanceStatus.IDLE;
@@ -124,7 +124,7 @@ public abstract class AbstractGameRunner implements GameRunner, DownloadListener
         }
     }
 
-    protected void updateProgressBar() {
+    private void updateProgressBar() {
         synchronized (this.lock) {
             if (this.hasRemainingJobs()) {
                 long total = 0L;

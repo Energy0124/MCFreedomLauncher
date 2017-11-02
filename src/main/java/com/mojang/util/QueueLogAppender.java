@@ -26,7 +26,7 @@ public class QueueLogAppender extends AbstractAppender {
 
     private final BlockingQueue<String> queue;
 
-    public QueueLogAppender(final String name, final Filter filter, final Layout<? extends Serializable> layout, final boolean ignoreExceptions, final BlockingQueue<String> queue) {
+    private QueueLogAppender(final String name, final Filter filter, final Layout<? extends Serializable> layout, final boolean ignoreExceptions, final BlockingQueue<String> queue) {
         super(name, filter, layout, ignoreExceptions);
         this.queue = queue;
     }

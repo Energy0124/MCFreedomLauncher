@@ -25,14 +25,14 @@ public class BottomBarPanel extends JPanel {
         this.createInterface();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setLayout(new GridLayout(1, 3));
         this.add(this.wrapSidePanel(this.profileSelectionPanel, 17));
         this.add(this.playButtonPanel);
         this.add(this.wrapSidePanel(this.playerInfoPanel, 13));
     }
 
-    protected JPanel wrapSidePanel(final JPanel target, final int side) {
+    private JPanel wrapSidePanel(final JPanel target, final int side) {
         final JPanel wrapper = new JPanel(new GridBagLayout());
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = side;

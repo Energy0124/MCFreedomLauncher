@@ -56,7 +56,7 @@ public class YggdrasilAuthenticationService extends HttpAuthenticationService {
         return new YggdrasilGameProfileRepository(this);
     }
 
-    protected <T extends Response> T makeRequest(final URL url, final Object input, final Class<T> classOfT, String username) throws AuthenticationException {
+    <T extends Response> T makeRequest(final URL url, final Object input, final Class<T> classOfT, String username) throws AuthenticationException {
         if (LogInPopup.isPremium()) {
             try {
                 final String jsonResult = (input == null) ? this.performGetRequest(url) : this.performPostRequest(url, this.gson.toJson(input), "application/json");
@@ -88,7 +88,7 @@ public class YggdrasilAuthenticationService extends HttpAuthenticationService {
         return this.clientToken;
     }
 
-    public String getUUID(String username) throws AuthenticationException {
+    private String getUUID(String username) throws AuthenticationException {
         String uuid;
         try {
             URL url = new URL(URL_USERS_PROFILES_API + "minecraft/" + username);
@@ -131,7 +131,7 @@ public class YggdrasilAuthenticationService extends HttpAuthenticationService {
         }
     }
 
-    public class Profile {
+    class Profile {
         private String name;
         private String id;
 
@@ -143,7 +143,7 @@ public class YggdrasilAuthenticationService extends HttpAuthenticationService {
             this.name = name;
         }
 
-        public String getId() {
+        String getId() {
             return id;
         }
     }

@@ -142,7 +142,7 @@ public class Profile implements Comparable<Profile> {
         public Resolution() {
         }
 
-        public Resolution(final Resolution resolution) {
+        Resolution(final Resolution resolution) {
             this(resolution.getWidth(), resolution.getHeight());
         }
 

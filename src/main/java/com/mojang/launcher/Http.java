@@ -50,7 +50,11 @@ public class Http {
         try {
             return IOUtils.toString(inputStream, UTF_8);
         } finally {
-            IOUtils.closeQuietly(inputStream);
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                LOGGER.warn("Unable to close input stream");
+            }
         }
     }
 }

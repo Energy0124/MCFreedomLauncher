@@ -48,7 +48,7 @@ public class ProfileVersionPanel extends JPanel implements RefreshedVersionsList
         }
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.insets = new Insets(2, 2, 2, 2);
         constraints.anchor = WEST;
@@ -78,7 +78,7 @@ public class ProfileVersionPanel extends JPanel implements RefreshedVersionsList
         this.versionList.setRenderer(new VersionListRenderer());
     }
 
-    protected void addEventHandlers() {
+    private void addEventHandlers() {
         this.versionList.addItemListener(e -> ProfileVersionPanel.this.updateVersionSelection());
         for (final ReleaseTypeCheckBox type : this.customVersionTypes) {
             type.addItemListener(new ItemListener() {
@@ -177,7 +177,7 @@ public class ProfileVersionPanel extends JPanel implements RefreshedVersionsList
             this.type = type;
         }
 
-        public MinecraftReleaseType getType() {
+        MinecraftReleaseType getType() {
             return this.type;
         }
     }

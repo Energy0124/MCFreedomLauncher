@@ -3,7 +3,7 @@ package net.minecraft.launcher.updater;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-public class LibraryDownloadInfo {
+class LibraryDownloadInfo {
     private DownloadInfo artifact;
     private Map<String, DownloadInfo> classifiers;
 

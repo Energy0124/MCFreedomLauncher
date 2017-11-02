@@ -63,7 +63,7 @@ public class GameProcessBuilder {
         return this.sysOutFilter;
     }
 
-    protected String getProcessPath() {
+    private String getProcessPath() {
         return this.processPath;
     }
 

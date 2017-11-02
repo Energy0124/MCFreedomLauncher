@@ -1,5 +1,6 @@
 package io.github.lightwayup.minecraftfreedomlauncher.userinterface;
 
+import io.github.lightwayup.minecraftfreedomlauncher.utility.LauncherShutdown;
 import net.minecraft.launcher.LauncherConstants;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,41 +13,47 @@ import java.io.InputStream;
 
 public class IconManager {
     private static final Logger LOGGER = LogManager.getLogger();
-    private static Image IMAGE;
-    private static InputStream ICONSTREAM;
-    private static boolean IS_ICONSTREAM_OPEN = false;
+    private static Image IMAGE = null;
+    private static boolean ATTEMPTED_LOAD_IMAGE = false;
 
-    private static void initializeImage() throws IOException, IllegalArgumentException {
-        ICONSTREAM = IconManager.class.getResourceAsStream(LauncherConstants.IMAGE_FAVICON);
-        IS_ICONSTREAM_OPEN = true;
-        IMAGE = ImageIO.read(ICONSTREAM);
-        LOGGER.debug("Favicon image initialized");
+    private static void initializeImage() {
+        InputStream inputStream = IconManager.class.getResourceAsStream(LauncherConstants.IMAGE_FAVICON);
+        if (inputStream != null) {
+            try {
+                IMAGE = ImageIO.read(inputStream);
+            } catch (IOException exception1) {
+                LOGGER.error("Unable to read input stream of favicon image");
+            } finally {
+                try {
+                    inputStream.close();
+                } catch (IOException exception2) {
+                    LOGGER.error("Unable to close input stream of favicon image");
+                }
+            }
+        } else {
+            LOGGER.error("Unable to get favicon image as input stream");
+        }
+        ATTEMPTED_LOAD_IMAGE = true;
     }
 
-    public static ImageIcon getIcon() throws IOException, IllegalArgumentException {
-        return new ImageIcon(getImage());
+    public static ImageIcon getIcon() {
+        if (getImage() != null) {
+            return new ImageIcon(getImage());
+        } else {
+            return null;
+        }
     }
 
-    public static ImageIcon getIcon(int scaledWidth, int scaledHeight, int scalingMode) throws IOException, IllegalArgumentException {
-        return new ImageIcon(getImage(scaledWidth, scaledHeight, scalingMode));
-    }
-
-    public static Image getImage() throws IOException, IllegalArgumentException {
-        return getImage(64, 64, Image.SCALE_SMOOTH);
-    }
-
-    public static Image getImage(int scaledWidth, int scaledHeight, int scalingMode) throws IOException, IllegalArgumentException {
-        if (!IS_ICONSTREAM_OPEN) {
+    private static Image getImage() {
+        if (!ATTEMPTED_LOAD_IMAGE) {
             initializeImage();
         }
-        return IMAGE.getScaledInstance(scaledWidth, scaledHeight, scalingMode);
-    }
-
-    public static void closeIconStream() throws IOException {
-        if (IS_ICONSTREAM_OPEN) {
-            IMAGE = null;
-            ICONSTREAM.close();
-            IS_ICONSTREAM_OPEN = false;
+        if (IMAGE != null) {
+            return IMAGE.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+        } else {
+            JOptionPane.showMessageDialog(null, LauncherConstants.MESSAGE_UNKNOWN_ERROR, new LauncherConstants().windowTitle, JOptionPane.ERROR_MESSAGE);
+            LauncherShutdown.forcefullyShutdown("favicon can't be loaded");
+            return null;
         }
     }
 }

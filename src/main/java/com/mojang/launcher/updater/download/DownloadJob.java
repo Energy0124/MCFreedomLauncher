@@ -25,7 +25,7 @@ public class DownloadJob {
     private final StopWatch stopWatch;
     private boolean started;
 
-    public DownloadJob(final String name, final boolean ignoreFailures, final DownloadListener listener, final Collection<Downloadable> files) {
+    private DownloadJob(final String name, final boolean ignoreFailures, final DownloadListener listener, final Collection<Downloadable> files) {
         this.remainingFiles = new ConcurrentLinkedQueue<>();
         this.allFiles = Collections.synchronizedList(new ArrayList<Downloadable>());
         this.failures = Collections.synchronizedList(new ArrayList<Downloadable>());

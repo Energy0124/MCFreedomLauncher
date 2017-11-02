@@ -40,12 +40,12 @@ public class ExceptionalThreadPoolExecutor extends ThreadPoolExecutor {
         return new ExceptionalFutureTask<>(callable);
     }
 
-    public class ExceptionalFutureTask<T> extends FutureTask<T> {
-        public ExceptionalFutureTask(final Callable<T> callable) {
+    class ExceptionalFutureTask<T> extends FutureTask<T> {
+        ExceptionalFutureTask(final Callable<T> callable) {
             super(callable);
         }
 
-        public ExceptionalFutureTask(final Runnable runnable, final T result) {
+        ExceptionalFutureTask(final Runnable runnable, final T result) {
             super(runnable, result);
         }
 

@@ -17,9 +17,9 @@ import java.net.URI;
 import static net.minecraft.launcher.LauncherConstants.*;
 
 public class LauncherPanel extends JPanel {
-    public static final String CARD_DIRT_BACKGROUND = "loading";
-    public static final String CARD_LOGIN = "login";
-    public static final String CARD_LAUNCHER = "launcher";
+    private static final String CARD_DIRT_BACKGROUND = "loading";
+    private static final String CARD_LOGIN = "login";
+    private static final String CARD_LAUNCHER = "launcher";
     private static final Logger LOGGER = LogManager.getLogger();
     private final CardLayout cardLayout;
     private final LauncherTabPanel tabPanel;
@@ -38,13 +38,13 @@ public class LauncherPanel extends JPanel {
         this.createInterface();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.add(this.createLauncherInterface(), CARD_LAUNCHER);
         this.add(this.createDirtInterface(), CARD_DIRT_BACKGROUND);
         this.add(this.createLoginInterface(), CARD_LOGIN);
     }
 
-    protected JPanel createLauncherInterface() {
+    private JPanel createLauncherInterface() {
         final JPanel result = new JPanel(new BorderLayout());
         this.tabPanel.getBlog().setPage(URL_MINECRAFT);
         this.tabPanel.getReleases().setPage(URL_RELEASES);
@@ -105,11 +105,11 @@ public class LauncherPanel extends JPanel {
         return result;
     }
 
-    protected JPanel createDirtInterface() {
+    private JPanel createDirtInterface() {
         return new TexturedPanel(IMAGE_LAUNCHER_BACKGROUND);
     }
 
-    protected JPanel createLoginInterface() {
+    private JPanel createLoginInterface() {
         this.loginPanel.setLayout(new GridBagLayout());
         return this.loginPanel;
     }
@@ -126,7 +126,7 @@ public class LauncherPanel extends JPanel {
         return this.progressBar;
     }
 
-    public Launcher getMinecraftLauncher() {
+    private Launcher getMinecraftLauncher() {
         return this.minecraftLauncher;
     }
 

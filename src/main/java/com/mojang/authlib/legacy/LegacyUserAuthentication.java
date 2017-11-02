@@ -26,7 +26,7 @@ public class LegacyUserAuthentication extends HttpUserAuthentication {
 
     private String sessionToken;
 
-    protected LegacyUserAuthentication(final LegacyAuthenticationService authenticationService) {
+    LegacyUserAuthentication(final LegacyAuthenticationService authenticationService) {
         super(authenticationService);
     }
 

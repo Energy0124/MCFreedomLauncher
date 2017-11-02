@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.mojang.launcher.updater.LowerCaseEnumTypeAdapterFactory;
 import org.apache.commons.io.IOUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -56,7 +58,7 @@ public class LauncherConstants {
     public static final String URL_SESSION_PROFILE = "https://sessionserver.mojang.com/session/minecraft/profile/";
     public static final String URL_STATUS_CHECKER = "https://status.mojang.com/check?service=";
     public static final String URL_USERS_PROFILES_API = "https://api.mojang.com/users/profiles/";
-    static final String URL_VERSION_MANIFEST = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
+    private static final String URL_VERSION_MANIFEST = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
     // String Message A-Z
     public static final String MESSAGE_CANNOT_CONNECT_ONE = "Sorry, but we couldn't connect to our servers.";
     public static final String MESSAGE_CANNOT_CONNECT_TWO = "Please make sure that you are online and that Minecraft is not blocked.";
@@ -91,6 +93,8 @@ public class LauncherConstants {
     // String A-Z
     private static final String LAUNCHER_VERSION = "2.00.02";
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     public static URI constantURI(final String input) {
         try {
             return new URI(input);
@@ -111,7 +115,7 @@ public class LauncherConstants {
         return LAUNCHER_VERSION;
     }
 
-    protected static LauncherProperties getProperties() {
+    static LauncherProperties getProperties() {
         final Gson gson = new GsonBuilder().registerTypeAdapterFactory(new LowerCaseEnumTypeAdapterFactory()).create();
         final InputStream stream = LauncherConstants.class.getResourceAsStream("/launcher_properties.json");
         if (stream != null) {
@@ -120,7 +124,11 @@ public class LauncherConstants {
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
-                IOUtils.closeQuietly(stream);
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    LOGGER.warn("Unable to close input stream");
+                }
             }
         }
         return new LauncherProperties();
@@ -146,7 +154,7 @@ public class LauncherConstants {
         private final LauncherEnvironment environment;
         private final URL versionManifest;
 
-        public LauncherProperties() {
+        LauncherProperties() {
             this.environment = LauncherEnvironment.PRODUCTION;
             this.versionManifest = constantURL(URL_VERSION_MANIFEST);
         }

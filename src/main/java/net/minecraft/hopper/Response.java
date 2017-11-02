@@ -1,6 +1,6 @@
 package net.minecraft.hopper;
 
-public class Response {
+class Response {
     private String error;
 
     public String getError() {

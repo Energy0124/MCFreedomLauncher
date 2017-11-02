@@ -25,7 +25,7 @@ public abstract class Downloadable {
     private long expectedSize;
     private long endTime;
 
-    public Downloadable(final Proxy proxy, final URL remoteFile, final File localFile, final boolean forceDownload) {
+    protected Downloadable(final Proxy proxy, final URL remoteFile, final File localFile, final boolean forceDownload) {
         this.proxy = proxy;
         this.url = remoteFile;
         this.target = localFile;
@@ -125,7 +125,7 @@ public abstract class Downloadable {
         return this.target;
     }
 
-    public boolean shouldIgnoreLocal() {
+    boolean shouldIgnoreLocal() {
         return this.forceDownload;
     }
 

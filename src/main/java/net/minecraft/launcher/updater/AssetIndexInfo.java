@@ -5,9 +5,9 @@ import net.minecraft.launcher.LauncherConstants;
 import static net.minecraft.launcher.LauncherConstants.URL_JAR_FALLBACK;
 
 public class AssetIndexInfo extends DownloadInfo {
-    protected long totalSize;
-    protected String id;
-    protected boolean known;
+    private long totalSize;
+    private String id;
+    private boolean known;
 
     public AssetIndexInfo() {
         this.known = true;

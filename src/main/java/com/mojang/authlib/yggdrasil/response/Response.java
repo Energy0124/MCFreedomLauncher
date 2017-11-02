@@ -9,7 +9,7 @@ public class Response {
         return this.error;
     }
 
-    protected void setError(final String error) {
+    void setError(final String error) {
         this.error = error;
     }
 

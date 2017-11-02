@@ -47,7 +47,7 @@ public class LogInForm extends JPanel implements ActionListener {
         this.createInterface();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setLayout(new GridBagLayout());
         final GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = HORIZONTAL;

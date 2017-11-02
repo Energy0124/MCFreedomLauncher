@@ -214,11 +214,11 @@ public class MinecraftVersionManager implements VersionManager {
         return result;
     }
 
-    public VersionList getRemoteVersionList() {
+    private VersionList getRemoteVersionList() {
         return this.remoteVersionList;
     }
 
-    public VersionList getLocalVersionList() {
+    private VersionList getLocalVersionList() {
         return this.localVersionList;
     }
 
@@ -304,7 +304,13 @@ public class MinecraftVersionManager implements VersionManager {
         } catch (Exception ex) {
             MinecraftVersionManager.LOGGER.error("Couldn't download resources", ex);
         } finally {
-            IOUtils.closeQuietly(inputStream);
+            if (inputStream != null) {
+                try {
+                    inputStream.close();
+                } catch (IOException e) {
+                    LOGGER.warn("Unable to close input stream");
+                }
+            }
         }
         return result;
     }

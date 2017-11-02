@@ -1,6 +1,6 @@
 package net.minecraft.hopper;
 
-public class PublishRequest {
+class PublishRequest {
 
     public PublishRequest(final Report report) {
         int report_id = report.getId();

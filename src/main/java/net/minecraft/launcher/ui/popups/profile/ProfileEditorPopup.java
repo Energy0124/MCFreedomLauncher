@@ -31,7 +31,7 @@ public class ProfileEditorPopup extends JPanel implements ActionListener {
     private final ProfileVersionPanel profileVersionPanel;
     private final ProfileJavaPanel javaInfoPanel;
 
-    public ProfileEditorPopup(final Launcher minecraftLauncher, final Profile profile) {
+    private ProfileEditorPopup(final Launcher minecraftLauncher, final Profile profile) {
         super(true);
         this.saveButton = new JButton("Save Profile");
         this.cancelButton = new JButton("Cancel");
@@ -62,7 +62,7 @@ public class ProfileEditorPopup extends JPanel implements ActionListener {
         dialog.setVisible(true);
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         final JPanel standardPanels = new JPanel(true);
         standardPanels.setLayout(new BoxLayout(standardPanels, BoxLayout.Y_AXIS));
         standardPanels.add(this.profileInfoPanel);

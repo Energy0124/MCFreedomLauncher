@@ -1,6 +1,6 @@
 package com.mojang.authlib.yggdrasil;
 
-public class ProfileNotFoundException extends RuntimeException {
+class ProfileNotFoundException extends RuntimeException {
     public ProfileNotFoundException() {
     }
 

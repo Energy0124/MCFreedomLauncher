@@ -4,11 +4,11 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public abstract class AbstractGameProcess implements GameProcess {
-    protected final List<String> arguments;
-    protected final Predicate<String> sysOutFilter;
+    private final List<String> arguments;
+    private final Predicate<String> sysOutFilter;
     private GameProcessRunnable onExit;
 
-    public AbstractGameProcess(final List<String> arguments, final Predicate<String> sysOutFilter) {
+    protected AbstractGameProcess(final List<String> arguments, final Predicate<String> sysOutFilter) {
         this.arguments = arguments;
         this.sysOutFilter = sysOutFilter;
     }

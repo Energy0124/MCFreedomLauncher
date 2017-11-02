@@ -19,7 +19,7 @@ public class LegacyMinecraftSessionService extends HttpMinecraftSessionService {
     private static final URL JOIN_URL = LauncherConstants.constantURL(URL_LEGACY_SESSION + "joinserver.jsp");
     private static final URL CHECK_URL = LauncherConstants.constantURL(URL_LEGACY_SESSION + "checkserver.jsp");
 
-    protected LegacyMinecraftSessionService(final LegacyAuthenticationService authenticationService) {
+    LegacyMinecraftSessionService(final LegacyAuthenticationService authenticationService) {
         super(authenticationService);
     }
 

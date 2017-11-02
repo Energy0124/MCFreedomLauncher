@@ -55,7 +55,7 @@ public class RemoteVersionList extends VersionList {
         return true;
     }
 
-    public String getContent(final URL url) throws IOException {
+    private String getContent(final URL url) throws IOException {
         return Http.performGet(url, this.proxy);
     }
 
@@ -72,11 +72,11 @@ public class RemoteVersionList extends VersionList {
             this.latest = Maps.newEnumMap(MinecraftReleaseType.class);
         }
 
-        public List<PartialVersion> getVersions() {
+        List<PartialVersion> getVersions() {
             return this.versions;
         }
 
-        public Map<MinecraftReleaseType, String> getLatestVersions() {
+        Map<MinecraftReleaseType, String> getLatestVersions() {
             return this.latest;
         }
     }

@@ -51,7 +51,7 @@ public class ExistingUserListForm extends JPanel implements ActionListener {
         }
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setLayout(new GridBagLayout());
         this.setPreferredSize(new Dimension(924, 100));
         final GridBagConstraints constraints = new GridBagConstraints();
@@ -130,7 +130,7 @@ public class ExistingUserListForm extends JPanel implements ActionListener {
         }
     }
 
-    protected void removeUser(final String name, final String uuid) {
+    private void removeUser(final String name, final String uuid) {
         if (!SwingUtilities.isEventDispatchThread()) {
             SwingUtilities.invokeLater(() -> ExistingUserListForm.this.removeUser(name, uuid));
         } else {

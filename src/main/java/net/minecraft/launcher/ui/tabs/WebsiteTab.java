@@ -33,15 +33,9 @@ public class WebsiteTab extends JPanel {
         }
         this.minecraftLauncher = minecraftLauncher;
         this.setLayout(new BorderLayout());
-        try {
+        if (this.browser != null) {
             this.add(this.browser.getComponent(), "Center");
-        } catch (NullPointerException e) {
-            LOGGER.debug("A NullPointerException is caught!");
-        }
-        try {
             this.browser.resize(this.getSize());
-        } catch (NullPointerException e) {
-            LOGGER.debug("A NullPointerException is caught!");
         }
         this.addComponentListener(new ComponentAdapter() {
             @Override
@@ -51,7 +45,7 @@ public class WebsiteTab extends JPanel {
         });
     }
 
-    public static void addToSystemClassLoader(final File file) {
+    private static void addToSystemClassLoader(final File file) {
         if (ClassLoader.getSystemClassLoader() instanceof URLClassLoader) {
             final URLClassLoader classLoader = (URLClassLoader) ClassLoader.getSystemClassLoader();
             try {
@@ -98,7 +92,7 @@ public class WebsiteTab extends JPanel {
         return this.minecraftLauncher;
     }
 
-    public boolean hasJFX() {
+    private boolean hasJFX() {
         try {
             this.getClass().getClassLoader().loadClass("javafx.embed.swing.JFXPanel");
             return true;

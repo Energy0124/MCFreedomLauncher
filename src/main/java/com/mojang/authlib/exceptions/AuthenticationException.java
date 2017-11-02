@@ -1,7 +1,7 @@
 package com.mojang.authlib.exceptions;
 
 public class AuthenticationException extends Exception {
-    public AuthenticationException() {
+    AuthenticationException() {
     }
 
     public AuthenticationException(final String message) {
@@ -12,7 +12,7 @@ public class AuthenticationException extends Exception {
         super(message, cause);
     }
 
-    public AuthenticationException(final Throwable cause) {
+    AuthenticationException(final Throwable cause) {
         super(cause);
     }
 }

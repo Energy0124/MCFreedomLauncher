@@ -13,7 +13,7 @@ public class EtagDownloadable extends Downloadable {
         super(proxy, remoteFile, localFile, forceDownload);
     }
 
-    public static String getEtag(String etag) {
+    private static String getEtag(String etag) {
         if (etag == null) {
             etag = "-";
         } else if (etag.startsWith("\"") && etag.endsWith("\"")) {

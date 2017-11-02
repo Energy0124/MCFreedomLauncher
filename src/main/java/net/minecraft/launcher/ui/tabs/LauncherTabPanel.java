@@ -21,7 +21,7 @@ public class LauncherTabPanel extends JTabbedPane {
         this.createInterface();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.addTab("Update Notes", this.blog);
         // Launcher log isn't displayed for some reason...
         // this.addTab("Launcher Log", this.console);
@@ -57,7 +57,7 @@ public class LauncherTabPanel extends JTabbedPane {
         this.setSelectedComponent(newTab);
     }
 
-    protected void removeTab(final Component tab) {
+    private void removeTab(final Component tab) {
         for (int i = 0; i < this.getTabCount(); ++i) {
             if (this.getTabComponentAt(i) == tab) {
                 this.removeTabAt(i);

@@ -32,14 +32,14 @@ public class AuthErrorForm extends JPanel {
         this.clear();
     }
 
-    protected void createInterface() {
+    private void createInterface() {
         this.setBorder(new EmptyBorder(0, 0, 15, 0));
         this.setPreferredSize(new Dimension(924, 100));
         this.errorLabel.setFont(this.errorLabel.getFont().deriveFont(Font.PLAIN));
         this.add(this.errorLabel);
     }
 
-    public void clear() {
+    private void clear() {
         this.setVisible(false);
     }
 
@@ -68,7 +68,7 @@ public class AuthErrorForm extends JPanel {
         }
     }
 
-    public void refreshStatuses() {
+    private void refreshStatuses() {
         this.popup.getMinecraftLauncher().getLauncher().getVersionManager().getExecutorService().submit(() -> {
             try {
                 final TypeToken<Map<String, ServerStatus>> token = new TypeToken<>() {

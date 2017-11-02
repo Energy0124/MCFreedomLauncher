@@ -48,7 +48,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
         this.frame = frame;
     }
 
-    public void showLoginPrompt(final Launcher minecraftLauncher, final LogInPopup.Callback callback) {
+    private void showLoginPrompt(final Launcher minecraftLauncher, final LogInPopup.Callback callback) {
         SwingUtilities.invokeLater(() -> {
             final LogInPopup popup = new LogInPopup(minecraftLauncher, callback);
             SwingUserInterface.this.launcherPanel.setCard("login", popup);

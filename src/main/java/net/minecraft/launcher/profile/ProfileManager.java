@@ -12,6 +12,8 @@ import com.mojang.launcher.updater.LowerCaseEnumTypeAdapterFactory;
 import net.minecraft.launcher.Launcher;
 import net.minecraft.launcher.LauncherConstants;
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,7 +25,9 @@ import static net.minecraft.launcher.LauncherConstants.FORMAT_PROFILES;
 import static net.minecraft.launcher.LauncherConstants.FORMAT_VERSION;
 
 public class ProfileManager {
-    public static final String DEFAULT_PROFILE_NAME = "Minecraft";
+    private static final Logger LOGGER = LogManager.getLogger();
+
+    private static final String DEFAULT_PROFILE_NAME = "Minecraft";
     private final Launcher launcher;
     private final JsonParser parser;
     private final Gson gson;
@@ -70,9 +74,15 @@ public class ProfileManager {
                     if (this.launcher.getUserInterface().shouldDowngradeProfiles()) {
                         final File target = new File(this.profileFile.getParentFile(), "launcher_profiles.old.json");
                         if (target.exists()) {
-                            target.delete();
+                            boolean success = target.delete();
+                            if (!success) {
+                                LOGGER.error("Unable to delete target");
+                            }
                         }
-                        this.profileFile.renameTo(target);
+                        boolean success = this.profileFile.renameTo(target);
+                        if (!success) {
+                            LOGGER.error("Unable to rename to target");
+                        }
                         this.fireRefreshEvent();
                         this.fireUserChangedEvent();
                         return;
@@ -104,7 +114,7 @@ public class ProfileManager {
         }
     }
 
-    public void fireUserChangedEvent() {
+    private void fireUserChangedEvent() {
         for (final UserChangedListener listener : Lists.newArrayList(this.userChangedListeners)) {
             listener.onUserChanged(this);
         }
@@ -161,11 +171,11 @@ public class ProfileManager {
     }
 
     private static class RawProfileList {
-        public final String selectedProfile;
-        public final String selectedUser;
-        public final AuthenticationDatabase authenticationDatabase;
-        public Map<String, Profile> profiles;
-        public UUID clientToken;
+        final String selectedProfile;
+        final String selectedUser;
+        final AuthenticationDatabase authenticationDatabase;
+        Map<String, Profile> profiles;
+        UUID clientToken;
 
         private RawProfileList(final Map<String, Profile> profiles, final String selectedProfile, final String selectedUser, final UUID clientToken, final AuthenticationDatabase authenticationDatabase) {
             this.profiles = new HashMap<>();
@@ -177,10 +187,10 @@ public class ProfileManager {
             this.authenticationDatabase = authenticationDatabase;
         }
 
-        public static class Serializer implements JsonDeserializer<RawProfileList>, JsonSerializer<RawProfileList> {
+        static class Serializer implements JsonDeserializer<RawProfileList>, JsonSerializer<RawProfileList> {
             private final Launcher launcher;
 
-            public Serializer(final Launcher launcher) {
+            Serializer(final Launcher launcher) {
                 this.launcher = launcher;
             }
 

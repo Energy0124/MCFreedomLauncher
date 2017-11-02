@@ -153,7 +153,7 @@ public class Launcher {
         return remainingOptions.toArray(new String[remainingOptions.size()]);
     }
 
-    public void refreshVersionsAndProfiles() {
+    private void refreshVersionsAndProfiles() {
         this.getLauncher().getVersionManager().getExecutorService().submit(() -> {
             try {
                 Launcher.this.getLauncher().getVersionManager().refreshVersions();
@@ -256,7 +256,7 @@ public class Launcher {
         this.clientToken = clientToken;
     }
 
-    public void cleanupOrphanedAssets() throws IOException {
+    private void cleanupOrphanedAssets() throws IOException {
         final File assetsDir = new File(this.getLauncher().getWorkingDirectory(), "assets");
         final File indexDir = new File(assetsDir, "indexes");
         final File objectsDir = new File(assetsDir, "objects");
@@ -330,7 +330,7 @@ public class Launcher {
         deleteEmptyDirectories(librariesDir);
     }
 
-    public void cleanupOldSkins() {
+    private void cleanupOldSkins() {
         final File assetsDir = new File(this.getLauncher().getWorkingDirectory(), "assets");
         final File skinsDir = new File(assetsDir, "skins");
         if (!skinsDir.isDirectory()) {
@@ -346,7 +346,7 @@ public class Launcher {
         deleteEmptyDirectories(skinsDir);
     }
 
-    public void cleanupOldVirtuals() throws IOException {
+    private void cleanupOldVirtuals() throws IOException {
         final File assetsDir = new File(this.getLauncher().getWorkingDirectory(), "assets");
         final File virtualsDir = new File(assetsDir, "virtual");
         final DateTypeAdapter dateAdapter = new DateTypeAdapter();
@@ -375,7 +375,7 @@ public class Launcher {
         deleteEmptyDirectories(virtualsDir);
     }
 
-    public void cleanupOldNatives() {
+    private void cleanupOldNatives() {
         final File root = new File(this.launcher.getWorkingDirectory(), "versions/");
         Launcher.LOGGER.info("Looking for old natives & assets to clean up...");
         final IOFileFilter ageFilter = new AgeFileFilter(System.currentTimeMillis() - 3600000L);
@@ -396,7 +396,7 @@ public class Launcher {
         }
     }
 
-    public void cleanupOrphanedVersions() {
+    private void cleanupOrphanedVersions() {
         Launcher.LOGGER.info("Looking for orphaned versions to clean up...");
         final Set<String> referencedVersions = Sets.newHashSet();
         for (final Profile profile : this.getProfileManager().getProfiles().values()) {

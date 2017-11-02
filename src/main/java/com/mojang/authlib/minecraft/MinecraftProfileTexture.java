@@ -25,7 +25,7 @@ public class MinecraftProfileTexture {
         return this.metadata.get(key);
     }
 
-    public String getHash() {
+    private String getHash() {
         return FilenameUtils.getBaseName(this.url);
     }
 
