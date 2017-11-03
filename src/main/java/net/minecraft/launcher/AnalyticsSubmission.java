@@ -22,7 +22,7 @@ class AnalyticsSubmission {
     private static final String CONTENT_TYPE = "application/ms-maelstrom.v3+json;type=eventbatch";
     private static final Gson GSON = new GsonBuilder().create();
 
-    public static void sendStartup(final Proxy proxy) {
+    static void sendStartup(final Proxy proxy) {
         final JsonObject object = new JsonObject();
         final JsonArray events = new JsonArray();
         events.add(createStartupEvent());

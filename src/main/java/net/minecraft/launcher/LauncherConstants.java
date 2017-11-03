@@ -163,7 +163,7 @@ public class LauncherConstants {
             return this.environment;
         }
 
-        public URL getVersionManifest() {
+        URL getVersionManifest() {
             return this.versionManifest;
         }
     }

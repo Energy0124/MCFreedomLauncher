@@ -1,5 +1,6 @@
 package net.minecraft.launcher.ui.tabs;
 
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import net.minecraft.launcher.Launcher;
 
 import javax.swing.*;
@@ -9,7 +10,9 @@ public class LauncherTabPanel extends JTabbedPane {
     private final Launcher minecraftLauncher;
     private final WebsiteTab blog;
     private final ConsoleTab console;
+    private final ProfileListTab profile;
     private final WebsiteTab releases;
+    private final VersionInfoTab versionInfo;
     private CrashReportTab crashReportTab;
 
     public LauncherTabPanel(final Launcher minecraftLauncher) {
@@ -17,16 +20,19 @@ public class LauncherTabPanel extends JTabbedPane {
         this.minecraftLauncher = minecraftLauncher;
         this.blog = new WebsiteTab(minecraftLauncher);
         this.console = new ConsoleTab(minecraftLauncher);
+        this.profile = new ProfileListTab(minecraftLauncher);
         this.releases = new WebsiteTab(minecraftLauncher);
+        this.versionInfo = new VersionInfoTab(minecraftLauncher);
         this.createInterface();
     }
 
     private void createInterface() {
-        this.addTab("Update Notes", this.blog);
-        // Launcher log isn't displayed for some reason...
-        // this.addTab("Launcher Log", this.console);
-        this.addTab("Profile Editor", new ProfileListTab(this.minecraftLauncher));
-        this.addTab("Launcher Releases", this.releases);
+        ImageIcon icon = IconManager.getIcon();
+        this.addTab("Update Notes", icon, this.blog, "Minecraft related news.");
+        this.addTab("Launcher Log", icon, this.console, "Logs for debugging purposes.");
+        this.addTab("Profile Editor", icon, this.profile, "Overview of created profiles.");
+        this.addTab("Launcher Releases", icon, this.releases, "Release notes of Minecraft Freedom Launcher.");
+        this.addTab("Version Info", icon, this.versionInfo, "Details of launcher and included libraries.");
     }
 
     public Launcher getMinecraftLauncher() {

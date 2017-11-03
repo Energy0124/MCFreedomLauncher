@@ -15,7 +15,7 @@ public class BottomBarPanel extends JPanel {
     private final PlayerInfoPanel playerInfoPanel;
     private final PlayButtonPanel playButtonPanel;
 
-    public BottomBarPanel(final Launcher minecraftLauncher) {
+    BottomBarPanel(final Launcher minecraftLauncher) {
         this.minecraftLauncher = minecraftLauncher;
         final int border = 4;
         this.setBorder(new EmptyBorder(border, border, border, border));

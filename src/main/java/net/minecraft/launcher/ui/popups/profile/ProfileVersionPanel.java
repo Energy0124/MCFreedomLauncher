@@ -32,7 +32,7 @@ public class ProfileVersionPanel extends JPanel implements RefreshedVersionsList
     private final JComboBox versionList;
     private final List<ReleaseTypeCheckBox> customVersionTypes;
 
-    public ProfileVersionPanel(final ProfileEditorPopup editor) {
+    ProfileVersionPanel(final ProfileEditorPopup editor) {
         this.versionList = new JComboBox();
         this.customVersionTypes = new ArrayList<>();
         this.editor = editor;

@@ -15,7 +15,7 @@ class TexturedPanel extends JPanel {
     private Image image;
     private Image bgImage;
 
-    public TexturedPanel(final String filename) {
+    TexturedPanel(final String filename) {
         this.setOpaque(true);
         try {
             this.bgImage = ImageIO.read(TexturedPanel.class.getResource(filename)).getScaledInstance(32, 32, 16);

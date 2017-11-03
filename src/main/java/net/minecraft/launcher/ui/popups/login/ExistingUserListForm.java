@@ -29,7 +29,7 @@ public class ExistingUserListForm extends JPanel implements ActionListener {
     private final JButton logOutButton;
     private final ProfileManager profileManager;
 
-    public ExistingUserListForm(final LogInPopup popup) {
+    ExistingUserListForm(final LogInPopup popup) {
         this.userDropdown = new JComboBox();
         this.playButton = new JButton("Play");
         this.logOutButton = new JButton("Log Out");
@@ -122,10 +122,8 @@ public class ExistingUserListForm extends JPanel implements ActionListener {
                 }
             });
         } else if (e.getSource() == this.logOutButton) {
-            try {
+            if (selected instanceof String) {
                 this.removeUser((String) selected, uuid);
-            } catch (ClassCastException e1) {
-                LOGGER.debug("A ClassCastException is caught!");
             }
         }
     }

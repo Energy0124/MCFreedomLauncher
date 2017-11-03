@@ -43,7 +43,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     private final JFrame frame;
     private LauncherPanel launcherPanel;
 
-    public SwingUserInterface(final Launcher minecraftLauncher, final JFrame frame) {
+    SwingUserInterface(final Launcher minecraftLauncher, final JFrame frame) {
         this.minecraftLauncher = minecraftLauncher;
         this.frame = frame;
     }
@@ -55,7 +55,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
         });
     }
 
-    public void initializeFrame() {
+    void initializeFrame() {
         this.frame.getContentPane().removeAll();
         this.frame.setTitle(new LauncherConstants().windowTitle);
         this.frame.setPreferredSize(new Dimension(1280, 720));

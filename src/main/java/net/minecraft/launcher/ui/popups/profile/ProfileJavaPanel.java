@@ -17,7 +17,7 @@ class ProfileJavaPanel extends JPanel {
     private final JCheckBox javaPathCustom;
     private final JTextField javaPathField;
 
-    public ProfileJavaPanel(final ProfileEditorPopup editor) {
+    ProfileJavaPanel(final ProfileEditorPopup editor) {
         this.javaPathCustom = new JCheckBox("Executable:");
         this.javaPathField = new JTextField();
         this.editor = editor;

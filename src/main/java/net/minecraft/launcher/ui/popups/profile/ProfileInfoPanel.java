@@ -23,7 +23,7 @@ class ProfileInfoPanel extends JPanel {
     private final JCheckBox launcherVisibilityCustom;
     private final JComboBox launcherVisibilityOption;
 
-    public ProfileInfoPanel(final ProfileEditorPopup editor) {
+    ProfileInfoPanel(final ProfileEditorPopup editor) {
         this.gameDirCustom = new JCheckBox("Game Directory:");
         this.profileName = new JTextField();
         this.gameDirField = new JTextField();

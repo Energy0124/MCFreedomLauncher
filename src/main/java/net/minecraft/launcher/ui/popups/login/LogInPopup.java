@@ -113,7 +113,7 @@ public class LogInPopup extends JPanel implements ActionListener {
         return this.minecraftLauncher;
     }
 
-    public void setCanLogIn(final boolean enabled) {
+    void setCanLogIn(final boolean enabled) {
         if (SwingUtilities.isEventDispatchThread()) {
             this.loginButton.setEnabled(enabled);
             this.progressBar.setIndeterminate(false);
@@ -129,7 +129,7 @@ public class LogInPopup extends JPanel implements ActionListener {
         return this.logInForm;
     }
 
-    public AuthErrorForm getErrorForm() {
+    AuthErrorForm getErrorForm() {
         return this.errorForm;
     }
 
@@ -137,11 +137,11 @@ public class LogInPopup extends JPanel implements ActionListener {
         return this.existingUserListForm;
     }
 
-    public void setLoggedIn(final String uuid) {
+    void setLoggedIn(final String uuid) {
         this.callback.onLogIn(uuid);
     }
 
-    public void repack() {
+    void repack() {
         final Window window = SwingUtilities.windowForComponent(this);
         if (window != null) {
             window.pack();

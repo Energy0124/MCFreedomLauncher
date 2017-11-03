@@ -470,7 +470,7 @@ public class Launcher {
         return this.winTenHack;
     }
 
-    public void setWinTenHack() {
+    void setWinTenHack() {
         this.winTenHack = true;
     }
 }

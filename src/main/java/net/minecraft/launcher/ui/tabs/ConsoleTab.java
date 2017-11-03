@@ -19,7 +19,7 @@ public class ConsoleTab extends JScrollPane {
     private final JTextArea console;
     private final Launcher minecraftLauncher;
 
-    public ConsoleTab(final Launcher minecraftLauncher) {
+    ConsoleTab(final Launcher minecraftLauncher) {
         this.console = new JTextArea();
         JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem copyTextButton = new JMenuItem("Copy All Text");

@@ -35,7 +35,7 @@ public class LogInForm extends JPanel implements ActionListener {
     private final JPanel userDropdownPanel;
     private final UserAuthentication authentication;
 
-    public LogInForm(final LogInPopup popup) {
+    LogInForm(final LogInPopup popup) {
         this.usernameField = new JTextField();
         this.passwordField = new JPasswordField();
         this.userDropdown = new JComboBox();
@@ -111,7 +111,7 @@ public class LogInForm extends JPanel implements ActionListener {
         }
     }
 
-    public void tryLogIn() {
+    void tryLogIn() {
         if (this.authentication.isLoggedIn() && this.authentication.getSelectedProfile() == null && ArrayUtils.isNotEmpty(this.authentication.getAvailableProfiles())) {
             this.popup.setCanLogIn(false);
             GameProfile selectedProfile = null;

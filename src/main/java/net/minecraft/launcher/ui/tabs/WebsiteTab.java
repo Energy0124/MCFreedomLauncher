@@ -25,7 +25,7 @@ public class WebsiteTab extends JPanel {
     private final Browser browser;
     private final Launcher minecraftLauncher;
 
-    public WebsiteTab(final Launcher minecraftLauncher) {
+    WebsiteTab(final Launcher minecraftLauncher) {
         this.browser = this.selectBrowser();
         if (browser == null) {
             DialogDisplay.showError(MESSAGE_JAVAFX_UNAVAILABLE);
@@ -66,22 +66,18 @@ public class WebsiteTab extends JPanel {
         final File jfxrt = new File(System.getProperty("java.home"), "lib/jfxrt.jar");
         if (jfxrt.isFile()) {
             WebsiteTab.LOGGER.debug("Attempting to load {}...", jfxrt);
-            int i = 0;
-            while (i < 3) {
                 try {
                     addToSystemClassLoader(jfxrt);
                     WebsiteTab.LOGGER.info("JFX has been detected & successfully loaded");
                     return new JFXBrowser();
                 } catch (Throwable e) {
                     WebsiteTab.LOGGER.debug("JFX has been detected but unsuccessfully loaded", e);
-                    ++i;
                 }
-            }
-            WebsiteTab.LOGGER.fatal("JFX has been detected but unsuccessfully loaded too many times, goodbye");
+            return null;
+        } else {
+            WebsiteTab.LOGGER.fatal("JFX was not found at {}, goodbye", jfxrt);
             return null;
         }
-        WebsiteTab.LOGGER.fatal("JFX was not found at {}, goodbye", jfxrt);
-        return null;
     }
 
     public void setPage(final String url) {

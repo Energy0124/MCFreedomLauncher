@@ -24,7 +24,7 @@ public class AuthErrorForm extends JPanel {
     private final JLabel errorLabel;
     private final Gson gson;
 
-    public AuthErrorForm(final LogInPopup popup) {
+    AuthErrorForm(final LogInPopup popup) {
         this.errorLabel = new JLabel();
         this.gson = new GsonBuilder().registerTypeAdapterFactory(new LowerCaseEnumTypeAdapterFactory()).create();
         this.popup = popup;
@@ -49,7 +49,7 @@ public class AuthErrorForm extends JPanel {
         this.popup.repack();
     }
 
-    public void displayError(final Throwable throwable, final String... lines) {
+    void displayError(final Throwable throwable, final String... lines) {
         if (SwingUtilities.isEventDispatchThread()) {
             StringBuilder error = new StringBuilder();
             for (final String line : lines) {
@@ -88,10 +88,6 @@ public class AuthErrorForm extends JPanel {
         YELLOW("May be experiencing issues."),
         RED("Offline, experiencing problems.");
 
-        private final String title;
-
-        ServerStatus(final String title) {
-            this.title = title;
-        }
+        ServerStatus(final String title) {}
     }
 }

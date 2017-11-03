@@ -5,7 +5,7 @@ import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import net.minecraft.launcher.Launcher;
 import net.minecraft.launcher.LauncherConstants;
 import net.minecraft.launcher.SwingUserInterface;
-import net.minecraft.launcher.profile.AuthenticationDatabase;
+//import net.minecraft.launcher.profile.AuthenticationDatabase;
 import net.minecraft.launcher.profile.Profile;
 import net.minecraft.launcher.profile.ProfileManager;
 import net.minecraft.launcher.profile.RefreshedProfilesListener;
@@ -43,7 +43,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
     private final JMenuItem deleteProfileButton;
     private final JMenuItem browseGameFolder;
 
-    public ProfileListTab(final Launcher minecraftLauncher) {
+    ProfileListTab(final Launcher minecraftLauncher) {
         this.dataModel = new ProfileTableModel();
         this.table = new JTable(this.dataModel);
         this.popupMenu = new JPopupMenu();
@@ -220,7 +220,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
         @Override
         public Object getValueAt(final int rowIndex, final int columnIndex) {
             final Profile profile = this.profiles.get(rowIndex);
-            final AuthenticationDatabase authDatabase = ProfileListTab.this.minecraftLauncher.getProfileManager().getAuthDatabase();
+            //Unused final AuthenticationDatabase authDatabase = ProfileListTab.this.minecraftLauncher.getProfileManager().getAuthDatabase();
             switch (columnIndex) {
                 case 0: {
                     return profile.getName();

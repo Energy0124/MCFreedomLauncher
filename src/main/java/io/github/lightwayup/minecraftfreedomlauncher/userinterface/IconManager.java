@@ -14,7 +14,7 @@ import java.io.InputStream;
 public class IconManager {
     private static final Logger LOGGER = LogManager.getLogger();
     private static Image IMAGE = null;
-    private static boolean ATTEMPTED_LOAD_IMAGE = false;
+    private static boolean ATTEMPTED = false;
 
     private static void initializeImage() {
         InputStream inputStream = IconManager.class.getResourceAsStream(LauncherConstants.IMAGE_FAVICON);
@@ -33,7 +33,7 @@ public class IconManager {
         } else {
             LOGGER.error("Unable to get favicon image as input stream");
         }
-        ATTEMPTED_LOAD_IMAGE = true;
+        ATTEMPTED = true;
     }
 
     public static ImageIcon getIcon() {
@@ -45,7 +45,7 @@ public class IconManager {
     }
 
     private static Image getImage() {
-        if (!ATTEMPTED_LOAD_IMAGE) {
+        if (!ATTEMPTED) {
             initializeImage();
         }
         if (IMAGE != null) {
