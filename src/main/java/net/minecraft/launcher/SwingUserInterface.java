@@ -57,7 +57,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
 
     void initializeFrame() {
         this.frame.getContentPane().removeAll();
-        this.frame.setTitle(new LauncherConstants().windowTitle);
+        this.frame.setTitle(LauncherConstants.getTitle());
         this.frame.setPreferredSize(new Dimension(1280, 720));
         this.frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         this.frame.setResizable(false);
@@ -221,7 +221,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
     @Override
     public boolean shouldDowngradeProfiles() {
         try {
-            final int result = JOptionPane.showConfirmDialog(this.frame, MESSAGE_LAUNCHER_NEWER_VERSION_USED, new LauncherConstants().windowTitle, YES_NO_OPTION, ERROR_MESSAGE, IconManager.getIcon());
+            final int result = JOptionPane.showConfirmDialog(this.frame, MESSAGE_LAUNCHER_NEWER_VERSION_USED, LauncherConstants.getTitle(), YES_NO_OPTION, ERROR_MESSAGE, IconManager.getIcon());
             return result == YES_OPTION;
         } catch (Exception e) {
             LOGGER.debug("An Exception is caught!");
@@ -231,7 +231,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
 
     @Override
     public String getTitle() {
-        return new LauncherConstants().windowTitle;
+        return LauncherConstants.getTitle();
     }
 
     public JFrame getFrame() {

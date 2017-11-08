@@ -118,7 +118,7 @@ public class ProfileListTab extends JScrollPane implements RefreshedProfilesList
             }
             final Profile current = ProfileListTab.this.dataModel.profiles.get(selection);
             try {
-                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, new LauncherConstants().windowTitle, YES_NO_OPTION, WARNING_MESSAGE, IconManager.getIcon());
+                final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileListTab.this.minecraftLauncher.getUserInterface()).getFrame(), MESSAGE_CONFIRM_PROFILE_DELETION, LauncherConstants.getTitle(), YES_NO_OPTION, WARNING_MESSAGE, IconManager.getIcon());
                 if (result == YES_OPTION) {
                     ProfileListTab.this.minecraftLauncher.getProfileManager().getProfiles().remove(current.getName());
                     try {

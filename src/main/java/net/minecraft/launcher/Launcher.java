@@ -58,7 +58,6 @@ public class Launcher {
     private final ProfileManager profileManager;
     private final Gson gson;
     private final GameLaunchDispatcher launchDispatcher;
-    private boolean winTenHack;
     private UUID clientToken;
     private String requestedUser;
 
@@ -68,7 +67,6 @@ public class Launcher {
 
     public Launcher(final JFrame frame, final File workingDirectory, final Proxy proxy, final PasswordAuthentication proxyAuth, final String[] args, final Integer bootstrapVersion) {
         this.gson = new Gson();
-        this.winTenHack = false;
         this.clientToken = UUID.randomUUID();
         this.setupErrorHandling();
         this.bootstrapVersion = bootstrapVersion;
@@ -464,13 +462,5 @@ public class Launcher {
 
     public GameLaunchDispatcher getLaunchDispatcher() {
         return this.launchDispatcher;
-    }
-
-    public boolean usesWinTenHack() {
-        return this.winTenHack;
-    }
-
-    void setWinTenHack() {
-        this.winTenHack = true;
     }
 }

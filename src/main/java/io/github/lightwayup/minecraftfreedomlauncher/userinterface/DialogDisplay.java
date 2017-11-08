@@ -26,6 +26,6 @@ public class DialogDisplay {
     }
 
     private static void show(String message, int type) {
-        JOptionPane.showMessageDialog(null, message, new LauncherConstants().windowTitle, type, IconManager.getIcon());
+        JOptionPane.showMessageDialog(null, message, LauncherConstants.getTitle(), type, IconManager.getIcon());
     }
 }

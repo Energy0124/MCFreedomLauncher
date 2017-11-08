@@ -75,7 +75,7 @@ public class CrashReportTab extends JPanel {
 
     private void showPublishReportPrompt() {
         try {
-            final int result = JOptionPane.showConfirmDialog(this, MESSAGE_PUBLISH_CRASH_REPORT, new LauncherConstants().windowTitle, YES_NO_OPTION, INFORMATION_MESSAGE, IconManager.getIcon());
+            final int result = JOptionPane.showConfirmDialog(this, MESSAGE_PUBLISH_CRASH_REPORT, LauncherConstants.getTitle(), YES_NO_OPTION, INFORMATION_MESSAGE, IconManager.getIcon());
             if (result == YES_OPTION) {
                 try {
                     HopperService.publishReport(this.minecraftLauncher.getLauncher().getProxy(), this.hopperServiceResponse.getReport());
@@ -93,7 +93,7 @@ public class CrashReportTab extends JPanel {
             DialogDisplay.showInfo(this.hopperServiceResponse.getProblem().getDescription());
         } else {
             try {
-                final int result = JOptionPane.showConfirmDialog(this, this.hopperServiceResponse.getProblem().getDescription() + "\nDo you want to fix the problem?", new LauncherConstants().windowTitle, YES_NO_OPTION, INFORMATION_MESSAGE, IconManager.getIcon());
+                final int result = JOptionPane.showConfirmDialog(this, this.hopperServiceResponse.getProblem().getDescription() + "\nDo you want to fix the problem?", LauncherConstants.getTitle(), YES_NO_OPTION, INFORMATION_MESSAGE, IconManager.getIcon());
                 if (result == YES_OPTION) {
                     try {
                         OperatingSystem.openLink(new URI(this.hopperServiceResponse.getProblem().getUrl()));

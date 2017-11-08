@@ -52,7 +52,7 @@ public class ProfileEditorPopup extends JPanel implements ActionListener {
 
     public static void showEditProfileDialog(final Launcher minecraftLauncher, final Profile profile) {
         final JFrame frame = ((SwingUserInterface) minecraftLauncher.getUserInterface()).getFrame();
-        final JDialog dialog = new JDialog(frame, new LauncherConstants().windowTitle, true);
+        final JDialog dialog = new JDialog(frame, LauncherConstants.getTitle(), true);
         final ProfileEditorPopup editor = new ProfileEditorPopup(minecraftLauncher, profile);
         dialog.setPreferredSize(new Dimension(1024, 576));
         dialog.setResizable(false);

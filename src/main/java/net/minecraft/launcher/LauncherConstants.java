@@ -30,7 +30,7 @@ public class LauncherConstants {
     // String JVM Arguments A-Z
     public static final String JVM_ARGUMENTS_DEFAULT = "-XX:InitialHeapSize=512M -XX:MaxHeapSize=2048M -XX:+UseG1GC";
     // String A-Z
-    public final String windowTitle = "Minecraft Freedom Launcher " + LAUNCHER_VERSION;
+    private static final String WINDOW_TITLE = "Minecraft Freedom Launcher";
     public static final String SECURITY_CERTIFICATE = "/yggdrasil_session_pubkey.der";
     // String URL A-Z
     static final String URL_ANALYTICS_SUBMISSION = "https://minecraftprod.rtep.msgamestudios.com/tenants/minecraftprod/routes/java/";
@@ -91,7 +91,7 @@ public class LauncherConstants {
     public static final String MESSAGE_VERSIONS_DEVELOPMENT = "Are you sure you want to enable development builds?\nThey are not guaranteed to be stable and may corrupt your world.\nYou are advised to run this in a separate directory or run regular backups.";
     public static final String MESSAGE_VERSIONS_OLD = "These versions are very out of date and may be unstable. Any bugs, crashes, missing features or\nother nasties you may find will never be fixed in these versions.\nIt is strongly recommended you play these in separate directories to avoid corruption.";
     // String A-Z
-    private static final String LAUNCHER_VERSION = "2.00.02";
+    private static final String LAUNCHER_VERSION = LauncherConstants.class.getPackage().getImplementationVersion();
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -112,7 +112,15 @@ public class LauncherConstants {
     }
 
     public static String getVersionName() {
-        return LAUNCHER_VERSION;
+        if (LAUNCHER_VERSION != null) {
+            return LAUNCHER_VERSION;
+        } else {
+            return "2";
+        }
+    }
+
+    public static String getTitle() {
+        return WINDOW_TITLE + " " + getVersionName();
     }
 
     static LauncherProperties getProperties() {

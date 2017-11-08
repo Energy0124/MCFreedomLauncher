@@ -14,7 +14,7 @@ import java.awt.datatransfer.StringSelection;
 public class ConsoleTab extends JScrollPane {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final Font MONOSPACED = new Font("Monospaced", Font.PLAIN, 12);
+    private static final Font MONOSPACED = new Font(Font.MONOSPACED, Font.PLAIN, 12);
 
     private final JTextArea console;
     private final Launcher minecraftLauncher;

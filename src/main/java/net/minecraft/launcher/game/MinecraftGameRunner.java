@@ -160,10 +160,6 @@ public class MinecraftGameRunner extends AbstractGameRunner implements GameProce
         } else {
             processBuilder.withArguments(JVM_ARGUMENTS_DEFAULT.split(" "));
         }
-        if (this.minecraftLauncher.usesWinTenHack()) {
-            processBuilder.withArguments("-Dos.name=Windows 10");
-            processBuilder.withArguments("-Dos.version=10.0");
-        }
         processBuilder.withArguments("-Djava.library.path=" + this.nativeDir.getAbsolutePath());
         processBuilder.withArguments("-cp", this.constructClassPath(this.getVersion()));
         processBuilder.withArguments(this.getVersion().getMainClass());

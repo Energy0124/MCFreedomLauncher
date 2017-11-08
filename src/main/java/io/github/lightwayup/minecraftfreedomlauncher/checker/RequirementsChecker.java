@@ -2,10 +2,12 @@ package io.github.lightwayup.minecraftfreedomlauncher.checker;
 
 import com.mojang.launcher.OperatingSystem;
 import io.github.lightwayup.minecraftfreedomlauncher.userinterface.DialogDisplay;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.StartupFrame;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.LauncherShutdown;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
 
@@ -14,27 +16,32 @@ import static net.minecraft.launcher.LauncherConstants.*;
 public class RequirementsChecker {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static void checkRequirements() {
+    public static void checkRequirements(final JFrame frame) {
         try {
             if (!isSupportedJava()) {
                 LOGGER.fatal("Java version check failed! Quitting...");
+                StartupFrame.hide(frame);
                 DialogDisplay.showError(MESSAGE_SUPPORTED_JAVA_9_UNAVAILABLE);
                 LauncherShutdown.forcefullyShutdown("Java version check did not pass");
             }
         } catch (NullPointerException | SecurityException | IllegalArgumentException exception) {
+            StartupFrame.hide(frame);
             DialogDisplay.showError(MESSAGE_UNKNOWN_ERROR + "\nIf the error persists, trying installing Java again.");
         }
         try {
             if (!isSupportedResolution()) {
                 LOGGER.fatal("Resolution check failed! Quitting...");
+                StartupFrame.hide(frame);
                 DialogDisplay.showError(MESSAGE_RESOLUTION_UNSUPPORTED);
                 LauncherShutdown.forcefullyShutdown("resolution check did not pass");
             }
         } catch (HeadlessException headlessException) {
+            StartupFrame.hide(frame);
             DialogDisplay.showError(MESSAGE_UNKNOWN_ERROR + "\nIf the error persists, trying installing Java again.");
         }
         if (!resourcesExist()) {
             LOGGER.fatal("Resources check failed! Quitting...");
+            StartupFrame.hide(frame);
             DialogDisplay.showError(MESSAGE_LAUNCHER_CORRUPTED);
             LauncherShutdown.forcefullyShutdown("resources check did not pass");
         }

@@ -91,7 +91,7 @@ public class ProfileVersionPanel extends JPanel implements RefreshedVersionsList
                     }
                     if (e.getStateChange() == ItemEvent.SELECTED && type.getType().getPopupWarning() != null) {
                         try {
-                            final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileVersionPanel.this.editor.getMinecraftLauncher().getUserInterface()).getFrame(), type.getType().getPopupWarning() + "\nAre you sure you want to continue?", new LauncherConstants().windowTitle, YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
+                            final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) ProfileVersionPanel.this.editor.getMinecraftLauncher().getUserInterface()).getFrame(), type.getType().getPopupWarning() + "\nAre you sure you want to continue?", LauncherConstants.getTitle(), YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
                             this.isUpdating = true;
                             if (result == YES_OPTION) {
                                 type.setSelected(true);

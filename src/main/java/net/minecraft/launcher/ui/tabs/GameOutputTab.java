@@ -18,7 +18,7 @@ import java.awt.datatransfer.StringSelection;
 public class GameOutputTab extends JScrollPane implements GameOutputLogProcessor {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final Font MONOSPACED = new Font("Monospaced", Font.PLAIN, 12);
+    private static final Font MONOSPACED = new Font(Font.MONOSPACED, Font.PLAIN, 12);
     private static final int MAX_LINE_COUNT = 1000;
 
     private final JTextArea console;

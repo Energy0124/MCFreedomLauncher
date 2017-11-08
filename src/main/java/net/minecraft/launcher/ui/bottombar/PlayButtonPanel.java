@@ -43,7 +43,7 @@ public class PlayButtonPanel extends JPanel implements RefreshedVersionsListener
             final GameLaunchDispatcher dispatcher = PlayButtonPanel.this.getMinecraftLauncher().getLaunchDispatcher();
             if (dispatcher.isRunningInSameFolder()) {
                 try {
-                    final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) PlayButtonPanel.this.getMinecraftLauncher().getUserInterface()).getFrame(), MESSAGE_MORE_THAN_ONE_INSTANCE, new LauncherConstants().windowTitle, YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
+                    final int result = JOptionPane.showConfirmDialog(((SwingUserInterface) PlayButtonPanel.this.getMinecraftLauncher().getUserInterface()).getFrame(), MESSAGE_MORE_THAN_ONE_INSTANCE, LauncherConstants.getTitle(), YES_NO_OPTION, QUESTION_MESSAGE, IconManager.getIcon());
                     if (result == YES_OPTION) {
                         dispatcher.play();
                     }

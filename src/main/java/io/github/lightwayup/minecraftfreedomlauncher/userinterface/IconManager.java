@@ -44,14 +44,32 @@ public class IconManager {
         }
     }
 
+    public static ImageIcon getIcon(int width, int height, int scaling) {
+        Image scaledImage = getImage(width, height, scaling);
+        if (scaledImage != null) {
+            return new ImageIcon(scaledImage);
+        } else {
+            return null;
+        }
+    }
+
     private static Image getImage() {
+        Image defaultScaledImage = getImage(64, 64, Image.SCALE_SMOOTH);
+        if (defaultScaledImage != null) {
+            return defaultScaledImage;
+        } else {
+            return null;
+        }
+    }
+
+    private static Image getImage(int width, int height, int scaling) {
         if (!ATTEMPTED) {
             initializeImage();
         }
         if (IMAGE != null) {
-            return IMAGE.getScaledInstance(64, 64, Image.SCALE_SMOOTH);
+            return IMAGE.getScaledInstance(width, height, scaling);
         } else {
-            JOptionPane.showMessageDialog(null, LauncherConstants.MESSAGE_UNKNOWN_ERROR, new LauncherConstants().windowTitle, JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, LauncherConstants.MESSAGE_UNKNOWN_ERROR, LauncherConstants.getTitle(), JOptionPane.ERROR_MESSAGE);
             LauncherShutdown.forcefullyShutdown("favicon can't be loaded");
             return null;
         }

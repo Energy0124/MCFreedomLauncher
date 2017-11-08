@@ -2,6 +2,7 @@ package net.minecraft.launcher;
 
 import io.github.lightwayup.minecraftfreedomlauncher.checker.RequirementsChecker;
 import io.github.lightwayup.minecraftfreedomlauncher.userinterface.LookAndFeelManager;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.StartupFrame;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.WorkingDirectory;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -24,12 +25,11 @@ import static net.minecraft.launcher.LauncherConstants.IMAGE_FAVICON;
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static void startLauncher(String[] args) {
+    public static void startLauncher(final String[] args, final JFrame loadingFrame) {
         LookAndFeelManager.setLookAndFeel();
-        RequirementsChecker.checkRequirements();
+        RequirementsChecker.checkRequirements(loadingFrame);
         final OptionParser parser = new OptionParser();
         parser.allowsUnrecognizedOptions();
-        parser.accepts("winTen");
         final OptionSpec<String> proxyHostOption = parser.accepts("proxyHost").withRequiredArg();
         final OptionSpec<Integer> proxyPortOption = parser.accepts("proxyPort").withRequiredArg().defaultsTo("8080", new String[0]).ofType(Integer.class);
         final OptionSpec<File> workDirOption = parser.accepts("workDir").withRequiredArg().ofType(File.class).defaultsTo(WorkingDirectory.getWorkingDirectory());
@@ -52,7 +52,7 @@ public class Main {
         }
         Main.LOGGER.debug("About to create JFrame.");
         final Proxy finalProxy = proxy;
-        final JFrame frame = new JFrame(new LauncherConstants().windowTitle);
+        final JFrame frame = new JFrame(LauncherConstants.getTitle());
         frame.setPreferredSize(new Dimension(1280, 720));
         try {
             final InputStream in = Launcher.class.getResourceAsStream(IMAGE_FAVICON);
@@ -64,18 +64,10 @@ public class Main {
         }
         frame.pack();
         frame.setLocationRelativeTo(null);
+        StartupFrame.hide(loadingFrame);
         frame.setVisible(true);
-        if (optionSet.has("winTen")) {
-            System.setProperty("os.name", "Windows 10");
-            System.setProperty("os.version", "10.0");
-        }
         Main.LOGGER.debug("Starting up launcher.");
-        final Launcher launcher = new Launcher(frame, workingDirectory, finalProxy, null, leftoverArgs.toArray(new String[leftoverArgs.size()]), 100);
-        if (optionSet.has("winTen")) {
-            launcher.setWinTenHack();
-        }
-        frame.setLocationRelativeTo(null);
-        Main.LOGGER.debug("End of main.");
+        final Launcher launcher = new Launcher(frame, workingDirectory, finalProxy, null, leftoverArgs.toArray(new String[leftoverArgs.size()]), LauncherConstants.VERSION_SUPER_COOL_BOOTSTRAP);
     }
 
 }

@@ -13,7 +13,6 @@ target/
 
 # Cache and additional info
 Thumbs.db
-ehthumbs.db
 .cache/
 Desktop.ini
 .DS_Store

@@ -27,7 +27,7 @@ public class LauncherTabPanel extends JTabbedPane {
     }
 
     private void createInterface() {
-        ImageIcon icon = IconManager.getIcon();
+        ImageIcon icon = IconManager.getIcon(16, 16, Image.SCALE_SMOOTH);
         this.addTab("Update Notes", icon, this.blog, "Minecraft related news.");
         this.addTab("Launcher Log", icon, this.console, "Logs for debugging purposes.");
         this.addTab("Profile Editor", icon, this.profile, "Overview of created profiles.");
