@@ -53,7 +53,7 @@ public class IconManager {
         }
     }
 
-    private static Image getImage() {
+    public static Image getImage() {
         Image defaultScaledImage = getImage(64, 64, Image.SCALE_SMOOTH);
         if (defaultScaledImage != null) {
             return defaultScaledImage;
@@ -62,7 +62,7 @@ public class IconManager {
         }
     }
 
-    private static Image getImage(int width, int height, int scaling) {
+    public static Image getImage(int width, int height, int scaling) {
         if (!ATTEMPTED) {
             initializeImage();
         }

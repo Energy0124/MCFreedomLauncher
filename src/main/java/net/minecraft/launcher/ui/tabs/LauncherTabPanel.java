@@ -29,10 +29,10 @@ public class LauncherTabPanel extends JTabbedPane {
     private void createInterface() {
         ImageIcon icon = IconManager.getIcon(16, 16, Image.SCALE_SMOOTH);
         this.addTab("Update Notes", icon, this.blog, "Minecraft related news.");
-        this.addTab("Launcher Log", icon, this.console, "Logs for debugging purposes.");
+        //this.addTab("Launcher Log", icon, this.console, "Logs for debugging purposes.");
         this.addTab("Profile Editor", icon, this.profile, "Overview of created profiles.");
         this.addTab("Launcher Releases", icon, this.releases, "Release notes of Minecraft Freedom Launcher.");
-        this.addTab("Version Info", icon, this.versionInfo, "Details of launcher and included libraries.");
+        //this.addTab("Version Info", icon, this.versionInfo, "Details of launcher and included libraries.");
     }
 
     public Launcher getMinecraftLauncher() {

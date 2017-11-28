@@ -1,6 +1,7 @@
 package net.minecraft.launcher;
 
 import io.github.lightwayup.minecraftfreedomlauncher.checker.RequirementsChecker;
+import io.github.lightwayup.minecraftfreedomlauncher.userinterface.IconManager;
 import io.github.lightwayup.minecraftfreedomlauncher.userinterface.LookAndFeelManager;
 import io.github.lightwayup.minecraftfreedomlauncher.userinterface.StartupFrame;
 import io.github.lightwayup.minecraftfreedomlauncher.utility.WorkingDirectory;
@@ -10,17 +11,12 @@ import joptsimple.OptionSpec;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.List;
-
-import static net.minecraft.launcher.LauncherConstants.IMAGE_FAVICON;
 
 public class Main {
     private static final Logger LOGGER = LogManager.getLogger();
@@ -50,24 +46,17 @@ public class Main {
         if (!success) {
             LOGGER.error("Unable to create directories");
         }
-        Main.LOGGER.debug("About to create JFrame.");
         final Proxy finalProxy = proxy;
+        Main.LOGGER.debug("About to create JFrame.");
         final JFrame frame = new JFrame(LauncherConstants.getTitle());
         frame.setPreferredSize(new Dimension(1280, 720));
-        try {
-            final InputStream in = Launcher.class.getResourceAsStream(IMAGE_FAVICON);
-            if (in != null) {
-                frame.setIconImage(ImageIO.read(in));
-            }
-        } catch (IOException ex2) {
-            LOGGER.debug("An IOException is caught!");
-        }
+        frame.setIconImage(IconManager.getImage());
         frame.pack();
         frame.setLocationRelativeTo(null);
         StartupFrame.hide(loadingFrame);
         frame.setVisible(true);
         Main.LOGGER.debug("Starting up launcher.");
-        final Launcher launcher = new Launcher(frame, workingDirectory, finalProxy, null, leftoverArgs.toArray(new String[leftoverArgs.size()]), LauncherConstants.VERSION_SUPER_COOL_BOOTSTRAP);
+        new Launcher(frame, workingDirectory, finalProxy, null, leftoverArgs.toArray(new String[leftoverArgs.size()]), LauncherConstants.VERSION_SUPER_COOL_BOOTSTRAP);
     }
 
 }

@@ -50,7 +50,11 @@ public class LogInPopup extends JPanel implements ActionListener {
     }
 
     public static boolean isPremium() {
-        return premiumModeCheckBox.isSelected();
+        if (premiumModeCheckBox != null) {
+            return premiumModeCheckBox.isSelected();
+        } else {
+            return false; // Need a proper fix
+        }
     }
 
     private void createInterface() {

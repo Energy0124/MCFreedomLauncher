@@ -20,14 +20,12 @@ import net.minecraft.launcher.ui.tabs.GameOutputTab;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.concurrent.TimeUnit;
@@ -79,14 +77,7 @@ public class SwingUserInterface implements MinecraftUserInterface {
                 LauncherShutdown.forcefullyShutdown("launcher is requested to shutdown");
             }
         });
-        try {
-            final InputStream in = Launcher.class.getResourceAsStream(IMAGE_FAVICON);
-            if (in != null) {
-                this.frame.setIconImage(ImageIO.read(in));
-            }
-        } catch (IOException ex) {
-            LOGGER.debug("An IOException is caught!");
-        }
+        this.frame.setIconImage(IconManager.getImage());
         this.launcherPanel = new LauncherPanel(this.minecraftLauncher);
         SwingUtilities.invokeLater(() -> {
             SwingUserInterface.this.frame.add(SwingUserInterface.this.launcherPanel);
