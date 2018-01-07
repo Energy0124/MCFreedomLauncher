@@ -1,4 +1,4 @@
-# Minecraft Freedom Launcher ![Build Status](https://ci.appveyor.com/api/projects/status/owd50rga8gvprt4o/branch/master?svg=true)
+# Minecraft Freedom Launcher [![Build status](https://ci.appveyor.com/api/projects/status/owd50rga8gvprt4o/branch/master?svg=true)](https://ci.appveyor.com/project/LightWayUp/freedomlauncher/branch/master)
 Free the new Minecraft launcher!
 
 ## About Project
