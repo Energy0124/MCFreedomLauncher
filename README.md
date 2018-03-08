@@ -1,4 +1,4 @@
-## THIS PROJECT IS CURRENTLY UNDERGOING A BIG UPDATE TO ADDRESS SOME ISSUES. DO NOT FORK, CLONE OR DOWNLOAD THE REPOSITORY NOW, THANKS.
+# THIS PROJECT IS CURRENTLY UNDERGOING A ~~BIG~~ HUGE UPDATE TO ADDRESS ~~SOME~~ A LOT OF ISSUES. DO NOT FORK, CLONE OR DOWNLOAD THE REPOSITORY NOW, THANKS.
 
 # Minecraft Freedom Launcher [![Build status](https://ci.appveyor.com/api/projects/status/owd50rga8gvprt4o/branch/master?svg=true)](https://ci.appveyor.com/project/LightWayUp/freedomlauncher/branch/master)
 Free the new Minecraft launcher!
